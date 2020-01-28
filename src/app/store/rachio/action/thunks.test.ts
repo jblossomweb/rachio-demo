@@ -47,15 +47,15 @@ const spies = {
   fail: getSpies(mockServiceError),
 }
 
-describe('store/person/action/thunks', () => {
+describe('store/rachio/action/thunks', () => {
 
-  describe('getId', () => {
+  describe('getSelfId', () => {
     const response = { id: mockPerson.id };
     const error = { errors: [{ message: 'uh oh'}]};
-    const success: Promise<any> = actionThunks.getId(
+    const success: Promise<any> = actionThunks.getSelfId(
       mockService,
     )(mockDispatch);
-    const fail: Promise<any> = actionThunks.getId(
+    const fail: Promise<any> = actionThunks.getSelfId(
       mockServiceError,
     )(mockDispatch);
 
@@ -66,17 +66,17 @@ describe('store/person/action/thunks', () => {
       expect(spies.fail.getSelfId).toHaveBeenCalled();
     });
 
-    it(`dispatches getIdSuccess action upon success`, async() => {
+    it(`dispatches getSelfIdSuccess action upon success`, async() => {
       const dispatchedAction = await success;
       expect(dispatchedAction).toEqual(
-        mockDispatch(actionCreators.getIdSuccess(response))
+        mockDispatch(actionCreators.getSelfIdSuccess(response))
       );
     });
 
-    it(`dispatches getIdError action upon fail`, async() => {
+    it(`dispatches apiError action upon fail`, async() => {
       const dispatchedAction = await fail;
       expect(dispatchedAction).toEqual(
-        mockDispatch(actionCreators.getIdError(error))
+        mockDispatch(actionCreators.apiError(error))
       );
     });
   });
@@ -107,10 +107,10 @@ describe('store/person/action/thunks', () => {
       );
     });
 
-    it(`dispatches getPersonError action upon fail`, async() => {
+    it(`dispatches apiError action upon fail`, async() => {
       const dispatchedAction = await fail;
       expect(dispatchedAction).toEqual(
-        mockDispatch(actionCreators.getPersonError(error))
+        mockDispatch(actionCreators.apiError(error))
       );
     });
   });

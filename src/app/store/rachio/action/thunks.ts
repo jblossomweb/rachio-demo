@@ -7,16 +7,16 @@ import {
 
 import * as action from './creators';
 
-export const getId = (
+export const getSelfId = (
   service: ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => service.getSelfId().then(
   (response) => dispatch(
-    action.getIdSuccess(response as ResponseInterface['getSelfIdSuccess']),
+    action.getSelfIdSuccess(response as ResponseInterface['getSelfIdSuccess']),
   ),
   (error) => dispatch(
-    action.getIdError(error as ResponseInterface['getSelfIdError']),
+    action.apiError(error as ResponseInterface['error']),
   ),
 );
 
@@ -30,6 +30,20 @@ export const getPerson = (
     action.getPersonSuccess(response as ResponseInterface['getPersonSuccess']),
   ),
   (error) => dispatch(
-    action.getPersonError(error as ResponseInterface['getPersonError']),
+    action.apiError(error as ResponseInterface['error']),
   ),
 );
+
+// export const putDeviceOn = (
+//   id: RequestInterface['getDevice']['id'],
+//   service: ServiceInterface,
+// ) => (
+//   dispatch: Dispatch<AnyAction>,
+// ) => service.putDeviceOn(id).then(
+//   () => dispatch(
+//     action.putDeviceOnSuccess(),
+//   ),
+//   (error) => dispatch(
+//     action.apiError(error as ResponseInterface['error']),
+//   ),
+// );

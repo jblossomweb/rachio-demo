@@ -27,37 +27,17 @@ export interface ResponseErrors {
 };
 
 export interface ResponseInterface {
+  error: ResponseErrors,
+  putSuccess: null | undefined, // 204 no response
   getSelfIdSuccess: { id: AppTypes.Person['id'] },
-  getSelfIdError: ResponseErrors,
   getPersonSuccess: AppTypes.RawPerson,
-  getPersonError: ResponseErrors,
   getDeviceSuccess: AppTypes.Device,
-  getDeviceError: ResponseErrors,
   getDeviceScheduleSuccess: any, // TODO: success response typing for getDeviceSchedule
-  getDeviceScheduleError: ResponseErrors,
   getDeviceEventsSuccess: any[], // TODO: success response typing for getDeviceEvents
-  getDeviceEventsError: ResponseErrors,
   getDeviceForecastSuccess: {
     current: AppTypes.Forecast,
     forecast: AppTypes.Forecast[],
   },
-  getDeviceForecastError: ResponseErrors,
-  putDeviceStopWaterSuccess: null | undefined, // 204 no response
-  putDeviceStopWaterError: ResponseErrors,
-  putDeviceRainDelaySuccess: null | undefined, // 204 no response
-  putDeviceRainDelayError: ResponseErrors,
-  putDeviceOnSuccess: null | undefined, // 204 no response
-  putDeviceOnError: ResponseErrors,
-  putDeviceOffSuccess: null | undefined, // 204 no response
-  putDeviceOffError: ResponseErrors,
-  putDevicePauseZoneRunSuccess: null | undefined, // 204 no response
-  putDevicePauseZoneRunError: ResponseErrors,
-  putDeviceResumeZoneRunSuccess: null | undefined, // 204 no response
-  putDeviceResumeZoneRunError: ResponseErrors,
-  getZoneSuccess: AppTypes.Zone,
-  getZoneError: ResponseErrors,
-  putZoneStartSuccess: null | undefined, // 204 no response
-  putZoneStartError: ResponseErrors,
 };
 
 export interface ServiceRestInterface {
@@ -70,28 +50,28 @@ export interface ServiceInterface {
   getSelfId: (
   ) => Promise<
     ResponseInterface['getSelfIdSuccess'] |
-    ResponseInterface['getSelfIdError']
+    ResponseInterface['error']
   >,
 
   getPerson: (
     id: RequestInterface['getPerson']['id'],
   ) => Promise<
     ResponseInterface['getPersonSuccess'] |
-    ResponseInterface['getPersonError']
+    ResponseInterface['error']
   >,
 
   getDevice: (
     id: RequestInterface['getDevice']['id'],
   ) => Promise<
     ResponseInterface['getDeviceSuccess'] |
-    ResponseInterface['getDeviceError']
+    ResponseInterface['error']
   >,
 
   getDeviceSchedule: (
     id: RequestInterface['getDeviceSchedule']['id'],
   ) => Promise<
     ResponseInterface['getDeviceScheduleSuccess'] |
-    ResponseInterface['getDeviceScheduleError']
+    ResponseInterface['error']
   >,
 
   getDeviceEvents: (
@@ -100,7 +80,7 @@ export interface ServiceInterface {
     endTime: RequestInterface['getDeviceEvents']['endTime'],
   ) => Promise<
     ResponseInterface['getDeviceEventsSuccess'] |
-    ResponseInterface['getDeviceEventsError']
+    ResponseInterface['error']
   >,
 
   getDeviceForecast: (
@@ -108,64 +88,64 @@ export interface ServiceInterface {
     units: RequestInterface['getDeviceForecast']['units'],
   ) => Promise<
     ResponseInterface['getDeviceForecastSuccess'] |
-    ResponseInterface['getDeviceForecastError']
+    ResponseInterface['error']
   >,
 
   putDeviceStopWater: (
     id: RequestInterface['putDeviceStopWater']['id'],
   ) => Promise<
-    ResponseInterface['putDeviceStopWaterSuccess'] |
-    ResponseInterface['putDeviceStopWaterError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putDeviceRainDelay: (
     id: RequestInterface['putDeviceRainDelay']['id'],
   ) => Promise<
-    ResponseInterface['putDeviceRainDelaySuccess'] |
-    ResponseInterface['putDeviceRainDelayError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putDeviceOn: (
     id: RequestInterface['putDeviceOn']['id'],
   ) => Promise<
-    ResponseInterface['putDeviceOnSuccess'] |
-    ResponseInterface['putDeviceOnError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putDeviceOff: (
     id: RequestInterface['putDeviceOff']['id'],
   ) => Promise<
-    ResponseInterface['putDeviceOffSuccess'] |
-    ResponseInterface['putDeviceOffError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putDevicePauseZoneRun: (
     id: RequestInterface['putDevicePauseZoneRun']['id'],
   ) => Promise<
-    ResponseInterface['putDevicePauseZoneRunSuccess'] |
-    ResponseInterface['putDevicePauseZoneRunError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putDeviceResumeZoneRun: (
     id: RequestInterface['putDeviceResumeZoneRun']['id'],
   ) => Promise<
-    ResponseInterface['putDeviceResumeZoneRunSuccess'] |
-    ResponseInterface['putDeviceResumeZoneRunError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   getZone: (
     id: RequestInterface['getZone']['id'],
   ) => Promise<
-    ResponseInterface['getZoneSuccess'] |
-    ResponseInterface['getZoneError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
   putZoneStart: (
     id: RequestInterface['putZoneStart']['id'],
     duration: RequestInterface['putZoneStart']['duration'],
   ) => Promise<
-    ResponseInterface['putZoneStartSuccess'] |
-    ResponseInterface['putZoneStartError']
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
   >,
 
 };

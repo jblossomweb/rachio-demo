@@ -1,3 +1,4 @@
+import React from 'react';
 import { Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import withImmutablePropsToJS from 'with-immutable-props-to-js';
@@ -6,19 +7,12 @@ import { AppState } from 'core/store';
 import { defaultRest } from 'core/rest/utils';
 import config from 'app/config';
 import * as AppTypes from 'app/types';
-
 import RachioService from 'app/services/rachio';
 import * as RachioServiceTypes from 'app/services/rachio/types';
+import * as rachioActions from 'app/store/rachio/action/creators';
+import * as rachioSelectors from 'app/store/rachio/selectors';
 
-import * as routerSelectors from 'app/store/router/selectors';
-import * as menuSelectors from 'app/store/menu/selectors';
-import * as menuActions from 'app/store/menu/action/creators';
-
-import * as personActions from 'app/store/person/action/creators';
-import * as personSelectors from 'app/store/person/selectors';
-
-import { menu } from 'app/routes';
-
+import Template from 'app/templates/LeftMenu';
 import HomePage, { DispatchProps } from './HomePage';
 
 const rachioApiBase: string = config.services.rachio.url!;
@@ -33,13 +27,10 @@ const liveRachioService = new RachioService(
 export const mapStateToProps = (
   state: AppState,
 ) => ({
-  menu,
-  menuCollapsed: menuSelectors.getCollapsed(state),
-  currentPath: routerSelectors.getPathName(state),
-  person: personSelectors.getPerson(state),
-  personThinking: personSelectors.getThinking(state),
-  personErrors: personSelectors.getErrors(state),
-  numDevices: personSelectors.getNumDevices(state),
+  person: rachioSelectors.getPerson(state),
+  personThinking: rachioSelectors.getThinking(state),
+  personErrors: rachioSelectors.getErrors(state),
+  numDevices: rachioSelectors.getNumDevices(state),
 });
 
 export const mapDispatchToProps = (
@@ -48,22 +39,22 @@ export const mapDispatchToProps = (
   dispatch: Dispatch<AnyAction>,
 ): DispatchProps => ({
   getPersonId: () => dispatch(
-    personActions.getId(rachioService)(dispatch),
+    rachioActions.getSelfId(rachioService)(dispatch),
   ),
   getPerson: (id: AppTypes.Person['id']) => dispatch(
-    personActions.getPerson(id, rachioService)(dispatch),
-  ),
-  collapseMenu: () => dispatch(
-    menuActions.collapseMenu(),
-  ),
-  expandMenu: () => dispatch(
-    menuActions.expandMenu(),
+    rachioActions.getPerson(id, rachioService)(dispatch),
   ),
 });
 
-export default connect(
+export const ConnectedPage = connect(
   mapStateToProps,
   mapDispatchToProps(liveRachioService),
 )(withImmutablePropsToJS(
   HomePage,
 ) as any);
+
+export default () => (
+  <Template title={`Home`}>
+    <ConnectedPage />
+  </Template>
+);

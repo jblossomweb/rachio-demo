@@ -7,13 +7,11 @@ export const Wrapper = styled.div`
   .MuiAppBar-colorPrimary {
     background-color: ${palette.BLUE};
   }
-  ${/* a:hover .MuiListItem-button, */ null}
   a:hover .MuiListItem-button.Mui-selected,
   .MuiListItem-button.Mui-selected {
     background-color: ${palette.BLUE};
     color: ${palette.WHITE};
   }
-  ${/* a:hover .MuiIcon-root, */ null}
   a:hover .MuiListItem-button.Mui-selected .MuiIcon-root,
   .MuiListItem-button.Mui-selected .MuiIcon-root {
     color: ${palette.WHITE};

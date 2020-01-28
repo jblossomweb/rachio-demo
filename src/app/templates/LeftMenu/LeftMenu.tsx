@@ -24,16 +24,24 @@ import * as Style from './LeftMenu.style';
 
 const logoWide: string = `${config.publicUrl}/logo-wide.svg`;
 
-export interface Props {
-  title: string,
+export interface OwnProps {
+  title?: string,
+}
+
+export interface StateProps {
   menu: MenuRoute[],
   menuCollapsed?: boolean,
   currentPath: MenuRoute['path'],
-  collapseMenu: () => void,
-  expandMenu: () => void,
 };
 
-const LeftMenu: React.FC<Props> = ({
+export interface DispatchProps {
+  collapseMenu: () => void,
+  expandMenu: () => void,
+}
+
+export type Props = OwnProps & StateProps & DispatchProps;
+
+export const LeftMenu: React.FC<Props> = ({
   title,
   menu,
   menuCollapsed,

@@ -9,11 +9,11 @@ import paths from '../paths';
 
 const mockErrors = { errors: [{ message: 'uh-oh'}] }
 
-describe('store/person/action/reducers', () => {
+describe('store/rachio/action/reducers', () => {
 
-  describe('PERSON_GET_ID', () => {
-    const action: actionTypes.Interface['PERSON_GET_ID'] = {
-      type: 'PERSON_GET_ID',
+  describe('RACHIO_GET_SELF_ID', () => {
+    const action: actionTypes.Interface['RACHIO_GET_SELF_ID'] = {
+      type: 'RACHIO_GET_SELF_ID',
     };
     const reducer = actionReducers[action.type] as AppReducer;
 
@@ -26,10 +26,10 @@ describe('store/person/action/reducers', () => {
     });
   });
 
-  describe('PERSON_GET_ID_SUCCESS', () => {
+  describe('RACHIO_GET_SELF_ID_SUCCESS', () => {
     const response = { id: mockPerson.id };
-    const action: actionTypes.Interface['PERSON_GET_ID_SUCCESS'] = {
-      type: 'PERSON_GET_ID_SUCCESS',
+    const action: actionTypes.Interface['RACHIO_GET_SELF_ID_SUCCESS'] = {
+      type: 'RACHIO_GET_SELF_ID_SUCCESS',
       payload: {
         response,
       },
@@ -62,10 +62,25 @@ describe('store/person/action/reducers', () => {
     });
   });
 
-  describe('PERSON_GET_ID_ERROR', () => {
+  describe('RACHIO_GET_PERSON', () => {
+    const action: actionTypes.Interface['RACHIO_GET_PERSON'] = {
+      type: 'RACHIO_GET_PERSON',
+    };
+    const reducer = actionReducers[action.type] as AppReducer;
+
+    it('should set thinking to true', () => {
+      const path = paths.thinking();
+      const state = getInitialState().setIn(path, undefined);
+      expect(state.getIn(path)).toEqual(undefined);
+      const newState = reducer(state, action);
+      expect(newState.getIn(path)).toEqual(true);
+    });
+  });
+
+  describe('RACHIO_API_ERROR', () => {
     const response = mockErrors;
-    const action: actionTypes.Interface['PERSON_GET_ID_ERROR'] = {
-      type: 'PERSON_GET_ID_ERROR',
+    const action: actionTypes.Interface['RACHIO_API_ERROR'] = {
+      type: 'RACHIO_API_ERROR',
       payload: {
         response,
       },
@@ -88,21 +103,6 @@ describe('store/person/action/reducers', () => {
       expect(newState.getIn(path)).not.toEqual(undefined);
       expect(newState.getIn(path)).not.toEqual(null);
       expect(newState.getIn(path)).toEqual(fromJS(action.payload.response.errors));
-    });
-  });
-
-  describe('PERSON_GET_PERSON', () => {
-    const action: actionTypes.Interface['PERSON_GET_PERSON'] = {
-      type: 'PERSON_GET_PERSON',
-    };
-    const reducer = actionReducers[action.type] as AppReducer;
-
-    it('should set thinking to true', () => {
-      const path = paths.thinking();
-      const state = getInitialState().setIn(path, undefined);
-      expect(state.getIn(path)).toEqual(undefined);
-      const newState = reducer(state, action);
-      expect(newState.getIn(path)).toEqual(true);
     });
   });
 

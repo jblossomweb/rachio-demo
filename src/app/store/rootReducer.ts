@@ -3,12 +3,12 @@ import extend from 'lodash/extend';
 
 /* import your reducers here. */
 import menuReducers from 'app/store/menu/action/reducers';
-import personReducers from 'app/store/person/action/reducers';
+import rachioReducers from 'app/store/rachio/action/reducers';
 
 const appReducers: AppReducers = extend({},
   /* register your reducers here. */
   menuReducers,
-  personReducers,
+  rachioReducers,
 ) as AppReducers;
 
 export default combineAllReducers(appReducers);
