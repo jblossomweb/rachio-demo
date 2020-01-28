@@ -4,8 +4,11 @@ export interface Person {
   username: string,
   fullName: string,
   email: string,
-  devices: Device[],
   deleted: boolean,
+};
+
+export interface RawPerson extends Person {
+  devices: Device[],
 };
 
 export interface Device {

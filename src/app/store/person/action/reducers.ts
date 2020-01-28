@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { AppState } from 'core/store';
+import omit from 'lodash/omit';
 
 import paths from '../paths';
 import * as types from './types';
@@ -56,7 +57,8 @@ export const getPersonSuccess = (
 ) => state
   .setIn(paths.thinking(), false)
   .setIn(paths.errors(), null)
-  .setIn(paths.person(), payload.response)
+  .setIn(paths.person(), fromJS(omit(payload.response, ['devices'])))
+  .setIn(paths.devices(), fromJS(payload.response.devices))
 ;
 
 /*

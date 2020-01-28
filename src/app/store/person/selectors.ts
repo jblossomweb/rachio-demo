@@ -60,3 +60,26 @@ const getErrorsSelector = (
 export const getErrors = createSelector([
   getErrorsSelector,
 ], (errors: DataTypes.Errors) => errors);
+
+/*
+ * getDevices
+ */
+
+const getDevicesSelector = (
+  state: AppState,
+): DataTypes.Devices => state.get('app').getIn(
+  paths.devices(),
+  DataTypes.defaultDevices,
+);
+
+export const getDevices = createSelector([
+  getDevicesSelector,
+], (devices: DataTypes.Devices) => devices);
+
+/*
+ * getNumDevices
+ */
+
+export const getNumDevices = createSelector([
+  getDevicesSelector,
+], (devices: DataTypes.Devices) => devices ? devices.size : 0);

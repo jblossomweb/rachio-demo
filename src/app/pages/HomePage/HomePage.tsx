@@ -1,10 +1,12 @@
 import React from 'react';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Template from 'app/templates/LeftMenu';
 import * as AppTypes from 'app/types';
 import { MenuRoute } from 'app/routes';
+
+import Template from 'app/templates/LeftMenu';
+import Spinner from 'app/components/atoms/Spinner';
+import PersonCard from 'app/components/molecules/PersonCard';
+
 import * as Style from './HomePage.style';
 
 export interface StateProps {
@@ -14,6 +16,7 @@ export interface StateProps {
   person?: AppTypes.Person,
   personThinking?: boolean,
   personErrors?: AppTypes.Error[],
+  numDevices: number,
 };
 
 export interface DispatchProps {
@@ -35,6 +38,7 @@ const HomePage: React.FC<Props> = ({
   person,
   getPerson,
   personThinking,
+  numDevices,
 }) => {
   if (!person || !person.id) {
     getPersonId();
@@ -52,13 +56,13 @@ const HomePage: React.FC<Props> = ({
       expandMenu={expandMenu}
     >
       <Style.Wrapper>
-        <Backdrop open={!!personThinking}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        <h1>Rachio Demo</h1>
-        <p>
-          { person ? (JSON.stringify(person)) : 'Zones User Interface'}
-        </p>
+        <Spinner visible={!!personThinking} />
+        { person && person.username ? (
+          <PersonCard
+            person={person}
+            numDevices={numDevices}
+          />
+        ) : null}
       </Style.Wrapper>
     </Template>
   );

@@ -12,21 +12,21 @@ export interface MenuRoute extends Route {
 
 export const menu: MenuRoute[] = [
   {
-    path: `/me`,
+    path: `/home`,
     page: HomePage,
-    title: 'My Profile',
-    icon: 'person',
+    title: 'Home',
+    icon: 'home',
   },
   {
     path: `/devices`,
     page: HomePage,
-    title: 'My Devices',
+    title: 'Devices',
     icon: 'videogame_asset',
   },
   {
     path: `/zones`,
     page: HomePage,
-    title: 'My Zones',
+    title: 'Zones',
     icon: 'eco',
   },
 ];

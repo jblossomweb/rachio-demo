@@ -4,7 +4,6 @@ import { rem } from 'polished';
 import palette from 'app/palette';
 
 export const Wrapper = styled.div`
-  text-align: center;
   img {
     max-width: 70vw;
     max-height: 60vh;

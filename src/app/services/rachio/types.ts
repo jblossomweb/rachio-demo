@@ -29,7 +29,7 @@ export interface ResponseErrors {
 export interface ResponseInterface {
   getSelfIdSuccess: { id: AppTypes.Person['id'] },
   getSelfIdError: ResponseErrors,
-  getPersonSuccess: AppTypes.Person,
+  getPersonSuccess: AppTypes.RawPerson,
   getPersonError: ResponseErrors,
   getDeviceSuccess: AppTypes.Device,
   getDeviceError: ResponseErrors,

@@ -39,6 +39,7 @@ export const mapStateToProps = (
   person: personSelectors.getPerson(state),
   personThinking: personSelectors.getThinking(state),
   personErrors: personSelectors.getErrors(state),
+  numDevices: personSelectors.getNumDevices(state),
 });
 
 export const mapDispatchToProps = (
