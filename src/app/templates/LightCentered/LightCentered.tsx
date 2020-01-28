@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Style from './style';
+import * as Style from './LightCentered.style';
 
 const LightCentered: React.FC = ({ children }) => (
   <Style.Wrapper>
