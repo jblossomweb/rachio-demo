@@ -20,7 +20,7 @@ export interface Device {
   scheduleRules: ScheduleRule[],
   flexScheduleRules: ScheduleRule[],
   serialNumber: string,
-  rainDelayExpirationDate: number,
+  rainDelayExpirationDate?: number,
   macAddress: string,
   on: boolean,
   model: 'GENERATION2_8ZONE' | string, // TODO: interpret enum
@@ -59,8 +59,8 @@ export interface Zone {
   efficiency: number,
   yardAreaSquareFeet: number,
   imageUrl: string,
-  lastWateredDuration: number,
-  lastWateredDate: number,
+  lastWateredDuration?: number,
+  lastWateredDate?: number,
   scheduleDataModified: boolean,
   fixedRuntime: number,
   wateringAdjustmentRuntimes: {
@@ -85,20 +85,20 @@ export interface ScheduleRule {
     'DAY_OF_WEEK_4' |
     string // TODO: interpret enum
   >,
-  startHour: number,
-  startMinute: number,
+  startHour?: number,
+  startMinute?: number,
+  startDay?: number,
+  startMonth?: number,
+  startYear?: number,
+  startDate?: number,
+  endDate?: number,
   operator: 'AFTER' | string, // TODO: interpret enum
   summary: string,
   cycleSoak: boolean,
-  cycleSoakStatus: 'ON' | 'OFF', // TODO: interpret enum
-  startDate: number,
+  cycleSoakStatus: "ON" | "OFF",
   name: string,
   enabled: boolean,
-  startDay: number,
-  startMonth: number,
-  startYear: number,
   totalDuration: number,
-  endDate: number,
   etSkip: boolean,
   externalName: string,
 };
@@ -121,4 +121,8 @@ export interface Forecast {
   calculatedPrecip: number,
   prettyTime: string,
   time: number,
+};
+
+export interface Error {
+  message: string,
 };

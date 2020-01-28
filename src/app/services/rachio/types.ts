@@ -28,36 +28,36 @@ export interface ResponseErrors {
 
 export interface ResponseInterface {
   getSelfIdSuccess: { id: AppTypes.Person['id'] },
-  getSelfIdError: ResponseError,
+  getSelfIdError: ResponseErrors,
   getPersonSuccess: AppTypes.Person,
-  getPersonError: ResponseError,
+  getPersonError: ResponseErrors,
   getDeviceSuccess: AppTypes.Device,
-  getDeviceError: ResponseError,
+  getDeviceError: ResponseErrors,
   getDeviceScheduleSuccess: any, // TODO: success response typing for getDeviceSchedule
-  getDeviceScheduleError: ResponseError,
+  getDeviceScheduleError: ResponseErrors,
   getDeviceEventsSuccess: any[], // TODO: success response typing for getDeviceEvents
-  getDeviceEventsError: ResponseError,
+  getDeviceEventsError: ResponseErrors,
   getDeviceForecastSuccess: {
     current: AppTypes.Forecast,
     forecast: AppTypes.Forecast[],
   },
-  getDeviceForecastError: ResponseError,
+  getDeviceForecastError: ResponseErrors,
   putDeviceStopWaterSuccess: null | undefined, // 204 no response
-  putDeviceStopWaterError: ResponseError,
+  putDeviceStopWaterError: ResponseErrors,
   putDeviceRainDelaySuccess: null | undefined, // 204 no response
-  putDeviceRainDelayError: ResponseError,
+  putDeviceRainDelayError: ResponseErrors,
   putDeviceOnSuccess: null | undefined, // 204 no response
-  putDeviceOnError: ResponseError,
+  putDeviceOnError: ResponseErrors,
   putDeviceOffSuccess: null | undefined, // 204 no response
-  putDeviceOffError: ResponseError,
+  putDeviceOffError: ResponseErrors,
   putDevicePauseZoneRunSuccess: null | undefined, // 204 no response
-  putDevicePauseZoneRunError: ResponseError,
+  putDevicePauseZoneRunError: ResponseErrors,
   putDeviceResumeZoneRunSuccess: null | undefined, // 204 no response
-  putDeviceResumeZoneRunError: ResponseError,
+  putDeviceResumeZoneRunError: ResponseErrors,
   getZoneSuccess: AppTypes.Zone,
-  getZoneError: ResponseError,
+  getZoneError: ResponseErrors,
   putZoneStartSuccess: null | undefined, // 204 no response
-  putZoneStartError: ResponseError,
+  putZoneStartError: ResponseErrors,
 };
 
 export interface ServiceRestInterface {
