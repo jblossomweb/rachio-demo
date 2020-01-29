@@ -2,7 +2,7 @@ import { Redirect, Route } from 'core/routes';
 
 import Page404 from 'app/pages/404';
 import HomePage from 'app/pages/HomePage';
-// import DevicesPage from 'app/pages/DevicesPage';
+import DevicesPage from 'app/pages/DevicesPage';
 // import ZonesPage from 'app/pages/ZonesPage';
 
 export interface MenuRoute extends Route {
@@ -19,7 +19,7 @@ export const menu: MenuRoute[] = [
   },
   {
     path: `/devices`,
-    page: HomePage,
+    page: DevicesPage,
     title: 'Devices',
     icon: 'videogame_asset',
   },

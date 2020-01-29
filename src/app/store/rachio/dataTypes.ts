@@ -7,8 +7,13 @@ export const defaultId: Id = undefined;
 export type Person = Record<Partial<AppTypes.Person>> | undefined;
 export const defaultPerson: Person = undefined;
 
-export type Devices = List<AppTypes.Device> | undefined;
+export type Device = Record<AppTypes.Device>;
+export type Devices = List<Device> | undefined;
 export const defaultDevices: Devices = undefined;
+
+export type Zone = Record<AppTypes.Zone>;
+export type Zones = List<Zone> | undefined;
+export const defaultZones: Zones = undefined;
 
 export type Thinking = boolean;
 export const defaultThinking: Thinking = false;

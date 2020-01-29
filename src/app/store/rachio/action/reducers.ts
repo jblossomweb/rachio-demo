@@ -78,6 +78,50 @@ export const getPersonSuccess = (
 ;
 
 /*
+ * RACHIO_PUT_DEVICE_ON
+ */
+export const putDeviceOn = (
+  state: AppState,
+  action: types.Interface['RACHIO_PUT_DEVICE_ON'],
+) => state
+  .setIn(paths.thinking(), true)
+;
+
+/*
+ * RACHIO_PUT_DEVICE_ON_SUCCESS
+ */
+export const putDeviceOnSuccess = (
+  state: AppState,
+  { payload }: types.Interface['RACHIO_PUT_DEVICE_ON_SUCCESS'],
+) => state
+  .setIn(paths.thinking(), false)
+  .setIn(paths.errors(), null)
+  .setIn(paths.deviceOn(payload.id), true)
+;
+
+/*
+ * RACHIO_PUT_DEVICE_OFF
+ */
+export const putDeviceOff = (
+  state: AppState,
+  action: types.Interface['RACHIO_PUT_DEVICE_OFF'],
+) => state
+  .setIn(paths.thinking(), true)
+;
+
+/*
+ * RACHIO_PUT_DEVICE_OFF_SUCCESS
+ */
+export const putDeviceOffSuccess = (
+  state: AppState,
+  { payload }: types.Interface['RACHIO_PUT_DEVICE_OFF_SUCCESS'],
+) => state
+  .setIn(paths.thinking(), false)
+  .setIn(paths.errors(), null)
+  .setIn(paths.deviceOn(payload.id), false)
+;
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError = (
@@ -96,5 +140,9 @@ export default {
   [types.RACHIO_GET_SELF_ID_SUCCESS as string]: getIdSuccess,
   [types.RACHIO_GET_PERSON as string]: getPerson,
   [types.RACHIO_GET_PERSON_SUCCESS as string]: getPersonSuccess,
+  [types.RACHIO_PUT_DEVICE_ON as string]: putDeviceOn,
+  [types.RACHIO_PUT_DEVICE_ON_SUCCESS as string]: putDeviceOnSuccess,
+  [types.RACHIO_PUT_DEVICE_OFF as string]: putDeviceOff,
+  [types.RACHIO_PUT_DEVICE_OFF_SUCCESS as string]: putDeviceOffSuccess,
   [types.RACHIO_API_ERROR as string]: apiError,
 };

@@ -6,6 +6,7 @@ const paths = {
   person: () => [rootPath, 'person'],
   devices: () => [rootPath, 'devices'],
   device: (id: AppTypes.Device['id']) => [rootPath, 'devices', id],
+  deviceOn: (id: AppTypes.Device['id']) => [rootPath, 'devices', id, 'on'],
   zones: () => [rootPath, 'zones'],
   zone: (id: AppTypes.Zone['id']) => [rootPath, 'zones', id],
   thinking: () => [rootPath, 'thinking'],

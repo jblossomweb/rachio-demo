@@ -8,20 +8,17 @@ export interface Person {
 };
 
 export interface RawPerson extends Person {
-  devices: Device[],
+  devices: RawDevice[],
 };
 
 export interface Device {
   createDate: number,
   id: string,
   status: 'ONLINE' | string, // TODO: interpret enum
-  zones: Zone[],
   timeZone: string,
   latitude: number,
   longitude: number,
   name: string,
-  scheduleRules: ScheduleRule[],
-  flexScheduleRules: ScheduleRule[],
   serialNumber: string,
   rainDelayExpirationDate?: number,
   macAddress: string,
@@ -33,7 +30,13 @@ export interface Device {
   deleted: boolean,
 };
 
-export interface Zone {
+export interface RawDevice extends Device {
+  zones: RawZone[],
+  scheduleRules: ScheduleRule[],
+  flexScheduleRules: ScheduleRule[],
+}
+
+export interface RawZone {
   id: string,
   zoneNumber: number,
   name: string,
@@ -76,10 +79,14 @@ export interface Zone {
   runtime: number,
 };
 
+export interface Zone extends RawZone {
+  deviceId: Device['id'],
+};
+
 export interface ScheduleRule {
   id: string,
   zones: Array<{
-    zoneId: Zone['id'],
+    zoneId: RawZone['id'],
     duration: number,
     sortOrder: number,
   }>,

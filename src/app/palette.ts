@@ -5,6 +5,8 @@ const palette: Palette = {
   WHITE: '#FFFFFF',
   GRAY: '#A5B3B6',
   BLUE: '#00A7E1',
+  GREEN: '#78BD42',
+  RED: '#FF4338',
 };
 
 export default palette;

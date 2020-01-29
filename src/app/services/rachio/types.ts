@@ -31,7 +31,7 @@ export interface ResponseInterface {
   putSuccess: null | undefined, // 204 no response
   getSelfIdSuccess: { id: AppTypes.Person['id'] },
   getPersonSuccess: AppTypes.RawPerson,
-  getDeviceSuccess: AppTypes.Device,
+  getDeviceSuccess: AppTypes.RawDevice,
   getDeviceScheduleSuccess: any, // TODO: success response typing for getDeviceSchedule
   getDeviceEventsSuccess: any[], // TODO: success response typing for getDeviceEvents
   getDeviceForecastSuccess: {

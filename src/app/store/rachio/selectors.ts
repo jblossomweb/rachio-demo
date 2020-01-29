@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import memoize from 'lodash/memoize';
 import { AppState } from 'core/store';
-
+import * as AppTypes from 'app/types';
 import * as DataTypes from './dataTypes';
 import paths from './paths';
 
@@ -74,7 +75,7 @@ const getDevicesSelector = (
 
 export const getDevices = createSelector([
   getDevicesSelector,
-], (devices: DataTypes.Devices) => devices);
+], (devices: DataTypes.Devices) => devices?.valueSeq());
 
 /*
  * getNumDevices
@@ -83,3 +84,60 @@ export const getDevices = createSelector([
 export const getNumDevices = createSelector([
   getDevicesSelector,
 ], (devices: DataTypes.Devices) => devices ? devices.size : 0);
+
+/*
+ * getDevice
+ */
+
+export const getDevice = createSelector([
+  getDevicesSelector,
+], (devices: DataTypes.Devices) => memoize((
+  id: string,
+) => devices?.find(
+  (device: DataTypes.Device) => device.get('id') === id,
+)));
+
+/*
+ * getZones
+ */
+
+const getZonesSelector = (
+  state: AppState,
+): DataTypes.Zones => state.get('app').getIn(
+  paths.zones(),
+  DataTypes.defaultDevices,
+);
+
+export const getZones = createSelector([
+  getZonesSelector,
+], (zones: DataTypes.Zones) => zones?.toSeq());
+
+/*
+ * getDeviceZones
+ */
+
+export const getDeviceZones = createSelector([
+  getZonesSelector,
+], (
+  zones: DataTypes.Zones,
+) => memoize((
+  deviceId: AppTypes.Device['id'],
+) => zones
+  ?.filter(
+    (zone: DataTypes.Zone) => zone.get('deviceId') === deviceId,
+  )
+  ?.toSeq()
+));
+
+/*
+ * getDeviceNumZones
+ */
+
+export const getDeviceNumZones = createSelector([
+  getDeviceZones,
+], (
+  deviceZones,
+) => memoize((
+  deviceId: AppTypes.Device['id'],
+) => deviceZones(deviceId)?.size || 0
+));

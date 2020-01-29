@@ -24,7 +24,7 @@ const PersonCard: React.FC<Props> = ({
   <Card>
     <CardHeader
       avatar={
-        <Avatar aria-label="recipe">
+        <Avatar>
           {/* TODO: we could put an avatar here if it were available */}
           {person.username.charAt(0).toUpperCase()}
         </Avatar>
@@ -40,7 +40,7 @@ const PersonCard: React.FC<Props> = ({
     <CardActions disableSpacing>
       <Link to={`/devices`}>
         <Button>
-          List Devices
+          Show {numDevices} devices
         </Button>
       </Link>
     </CardActions>

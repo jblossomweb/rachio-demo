@@ -34,16 +34,30 @@ export const getPerson = (
   ),
 );
 
-// export const putDeviceOn = (
-//   id: RequestInterface['getDevice']['id'],
-//   service: ServiceInterface,
-// ) => (
-//   dispatch: Dispatch<AnyAction>,
-// ) => service.putDeviceOn(id).then(
-//   () => dispatch(
-//     action.putDeviceOnSuccess(),
-//   ),
-//   (error) => dispatch(
-//     action.apiError(error as ResponseInterface['error']),
-//   ),
-// );
+export const putDeviceOn = (
+  id: RequestInterface['putDeviceOn']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => service.putDeviceOn(id).then(
+  () => dispatch(
+    action.putDeviceOnSuccess(id),
+  ),
+  (error) => dispatch(
+    action.apiError(error as ResponseInterface['error']),
+  ),
+);
+
+export const putDeviceOff = (
+  id: RequestInterface['putDeviceOff']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => service.putDeviceOff(id).then(
+  () => dispatch(
+    action.putDeviceOffSuccess(id),
+  ),
+  (error) => dispatch(
+    action.apiError(error as ResponseInterface['error']),
+  ),
+);

@@ -74,6 +74,70 @@ export const getPersonSuccess: (
 });
 
 /*
+ * RACHIO_PUT_DEVICE_ON
+ */
+
+export const putDeviceOn: (
+  id: RequestInterface['putDeviceOn']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_PUT_DEVICE_ON'] = (
+  id: RequestInterface['putDeviceOn']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.putDeviceOn(id, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_PUT_DEVICE_ON,
+    payload: { id },
+  };
+};
+
+/*
+ * RACHIO_PUT_DEVICE_ON_SUCCESS
+ */
+export const putDeviceOnSuccess: (
+  id: RequestInterface['putDeviceOn']['id'],
+) => ActionTypes.Interface['RACHIO_PUT_DEVICE_ON_SUCCESS'] = id => ({
+  type: ActionTypes.RACHIO_PUT_DEVICE_ON_SUCCESS,
+  payload: { id },
+});
+
+/*
+ * RACHIO_PUT_DEVICE_OFF
+ */
+
+export const putDeviceOff: (
+  id: RequestInterface['putDeviceOff']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_PUT_DEVICE_OFF'] = (
+  id: RequestInterface['putDeviceOff']['id'],
+  service: ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.putDeviceOff(id, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_PUT_DEVICE_OFF,
+    payload: { id },
+  };
+};
+
+/*
+ * RACHIO_PUT_DEVICE_OFF_SUCCESS
+ */
+export const putDeviceOffSuccess: (
+  id: RequestInterface['putDeviceOff']['id'],
+) => ActionTypes.Interface['RACHIO_PUT_DEVICE_OFF_SUCCESS'] = id => ({
+  type: ActionTypes.RACHIO_PUT_DEVICE_OFF_SUCCESS,
+  payload: { id },
+});
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError: (
