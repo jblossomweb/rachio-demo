@@ -46,6 +46,21 @@ export const getThinking = createSelector([
   getThinkingSelector,
 ], (thinking: DataTypes.Thinking) => thinking);
 
+/*
+ * getPolling
+ */
+
+const getPollingSelector = (
+  state: AppState,
+): DataTypes.Polling => state.get('app').getIn(
+  paths.polling(),
+  DataTypes.defaultPolling,
+);
+
+export const getPolling = createSelector([
+  getPollingSelector,
+], (polling: DataTypes.Polling) => polling);
+
 
 /*
  * getErrors
@@ -75,7 +90,9 @@ const getDevicesSelector = (
 
 export const getDevices = createSelector([
   getDevicesSelector,
-], (devices: DataTypes.Devices) => devices?.valueSeq());
+], (devices: DataTypes.Devices) => devices?.valueSeq()
+  .sortBy((device: DataTypes.Device) => device.get('createDate'))
+);
 
 /*
  * getNumDevices
@@ -84,6 +101,14 @@ export const getDevices = createSelector([
 export const getNumDevices = createSelector([
   getDevicesSelector,
 ], (devices: DataTypes.Devices) => devices ? devices.size : 0);
+
+/*
+ * getDevicesLoaded
+ */
+
+export const getDevicesLoaded = createSelector([
+  getDevicesSelector,
+], (devices: DataTypes.Devices) => !!devices);
 
 /*
  * getDevice

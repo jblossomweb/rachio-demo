@@ -10,6 +10,7 @@ export interface StateProps {
   person?: AppTypes.Person,
   personThinking?: boolean,
   personErrors?: AppTypes.Error[],
+  devicesLoaded: boolean,
   numDevices: number,
 };
 
@@ -25,12 +26,13 @@ const HomePage: React.FC<Props> = ({
   person,
   getPerson,
   personThinking,
+  devicesLoaded,
   numDevices,
 }) => {
   if (!person || !person.id) {
     getPersonId();
   }
-  if (person && !person.email) {
+  if (person && !devicesLoaded) {
     getPerson(person.id);
   }
   return (

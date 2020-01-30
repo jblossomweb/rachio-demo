@@ -7,6 +7,7 @@ import { AppState } from 'core/store';
 import * as routerSelectors from 'app/store/router/selectors';
 import * as menuSelectors from 'app/store/menu/selectors';
 import * as menuActions from 'app/store/menu/action/creators';
+import * as rachioActions from 'app/store/rachio/action/creators';
 
 import { menu } from 'app/routes';
 
@@ -31,6 +32,9 @@ export const mapDispatchToProps = (
   ),
   expandMenu: () => dispatch(
     menuActions.expandMenu(),
+  ),
+  refreshData: () => dispatch(
+    rachioActions.clearData(),
   ),
 });
 

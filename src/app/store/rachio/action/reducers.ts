@@ -122,6 +122,33 @@ export const putDeviceOffSuccess = (
 ;
 
 /*
+ * RACHIO_GET_DEVICE_STATE
+ */
+export const getDeviceState = (
+  state: AppState,
+  action: types.Interface['RACHIO_GET_DEVICE_STATE'],
+) => state
+  .setIn(paths.polling(), true)
+;
+
+/*
+ * RACHIO_GET_DEVICE_STATE_SUCCESS
+ */
+export const getDeviceStateSuccess = (
+  state: AppState,
+  { payload }: types.Interface['RACHIO_GET_DEVICE_STATE_SUCCESS'],
+) => payload.response.state?.deviceId ?
+  state
+    .setIn(paths.polling(), false)
+    .setIn(paths.errors(), null)
+    .setIn(
+      paths.deviceState(payload.response.state.deviceId),
+      fromJS(payload.response.state),
+    )
+  : state
+;
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError = (
@@ -130,6 +157,29 @@ export const apiError = (
 ) => state
   .setIn(paths.thinking(), false)
   .setIn(paths.errors(), fromJS(payload.response.errors))
+;
+
+/*
+ * RACHIO_LEGACY_API_ERROR
+ */
+export const legacyApiError = (
+  state: AppState,
+  { payload }: types.Interface['RACHIO_LEGACY_API_ERROR'],
+) => state
+  .setIn(paths.polling(), false)
+  .setIn(paths.errors(), fromJS([payload.response]))
+;
+
+/*
+ * RACHIO_CLEAR_DATA
+ */
+export const clearData = (
+  state: AppState,
+  action: types.Interface['RACHIO_CLEAR_DATA'],
+) => state
+  .setIn(paths.devices(), undefined)
+  .setIn(paths.zones(), undefined)
+  .setIn(paths.thinking(), false)
 ;
 
 /*
@@ -144,5 +194,9 @@ export default {
   [types.RACHIO_PUT_DEVICE_ON_SUCCESS as string]: putDeviceOnSuccess,
   [types.RACHIO_PUT_DEVICE_OFF as string]: putDeviceOff,
   [types.RACHIO_PUT_DEVICE_OFF_SUCCESS as string]: putDeviceOffSuccess,
+  [types.RACHIO_GET_DEVICE_STATE as string]: getDeviceState,
+  [types.RACHIO_GET_DEVICE_STATE_SUCCESS as string]: getDeviceStateSuccess,
   [types.RACHIO_API_ERROR as string]: apiError,
+  [types.RACHIO_LEGACY_API_ERROR as string]: legacyApiError,
+  [types.RACHIO_CLEAR_DATA as string]: clearData,
 };

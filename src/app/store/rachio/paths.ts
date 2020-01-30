@@ -7,9 +7,11 @@ const paths = {
   devices: () => [rootPath, 'devices'],
   device: (id: AppTypes.Device['id']) => [rootPath, 'devices', id],
   deviceOn: (id: AppTypes.Device['id']) => [rootPath, 'devices', id, 'on'],
+  deviceState: (id: AppTypes.Device['id']) => [rootPath, 'devices', id, 'state'],
   zones: () => [rootPath, 'zones'],
   zone: (id: AppTypes.Zone['id']) => [rootPath, 'zones', id],
   thinking: () => [rootPath, 'thinking'],
+  polling: () => [rootPath, 'polling'],
   errors: () => [rootPath, 'errors'],
 };
 

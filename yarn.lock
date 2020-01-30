@@ -10525,6 +10525,13 @@ promise.prototype.finally@^3.1.0:
     es-abstract "^1.17.0-next.0"
     function-bind "^1.1.1"
 
+promise@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
+  integrity sha1-SJZUxpJha4qlWwck+oCbt9tJxb8=
+  dependencies:
+    asap "~2.0.3"
+
 promise@^7.1.1:
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
@@ -10759,6 +10766,13 @@ react-app-polyfill@^1.0.4:
     raf "^3.4.1"
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
+
+react-async-poll@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-async-poll/-/react-async-poll-1.0.0.tgz#6f4969920b7da26f21aefc466fe8b4532c9d6b59"
+  integrity sha1-b0lpkgt9om8hrvxGb+i0Uyyda1k=
+  dependencies:
+    promise "7.1.1"
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"

@@ -15,7 +15,7 @@ import {
 
 import config from 'app/config';
 import * as AppTypes from 'app/types';
-import { getStatus } from './DeviceCard.utils';
+import { getStatus, deviceStatus } from './DeviceCard.utils';
 import * as Style from './DeviceCard.style';
 
 const deviceImage: string = `${config.publicUrl}/device.png`;
@@ -33,7 +33,7 @@ const DeviceCard: React.FC<Props> = ({
   putDeviceOn,
   putDeviceOff,
 }) => {
-  const [status, statusIcon, statusColor] = getStatus(device);
+  const [status, statusIcon, statusColor] = getStatus(device) || deviceStatus.OFFLINE;
   return (
     <Style.Wrapper>
       <Card>

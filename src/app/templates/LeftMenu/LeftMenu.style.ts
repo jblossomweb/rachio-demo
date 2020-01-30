@@ -20,10 +20,25 @@ export const Wrapper = styled.div`
   .MuiListItem-button {
     color: ${palette.BLACK};
   }
+
+  .MuiToolbar-root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 export const LogoWide = styled.img`
   width: ${rem(constants.drawerWidth / 2)};
+`;
+
+export const LeftSide = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const RightSide = styled.div`
 `;
 
 export const Children = styled.div`

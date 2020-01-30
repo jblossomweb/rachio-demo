@@ -9,6 +9,7 @@ import * as Style from './DevicesPage.style';
 export interface StateProps {
   person?: AppTypes.Person,
   thinking?: boolean,
+  polling?: boolean,
   errors?: AppTypes.Error[],
   devices?: AppTypes.Device[],
   deviceNumZones: (id: AppTypes.Device['id']) => number,
@@ -17,6 +18,7 @@ export interface StateProps {
 export interface DispatchProps {
   getPersonId: () => void,
   getPerson: (id: AppTypes.Person['id']) => void,
+  getDeviceState: (id: AppTypes.Device['id']) => void,
   putDeviceOn: (id: AppTypes.Device['id']) => void,
   putDeviceOff: (id: AppTypes.Device['id']) => void,
 };
@@ -37,7 +39,7 @@ const DevicesPage: React.FC<Props> = ({
   if (!thinking && (!person || !person.id)) {
     getPersonId();
   }
-  if (!thinking && (person && !person.email)) {
+  if (!thinking && (person && !devices)) {
     getPerson(person.id);
   }
   return (

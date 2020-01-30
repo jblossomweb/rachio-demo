@@ -30,6 +30,7 @@ export const mapStateToProps = (
   person: rachioSelectors.getPerson(state),
   personThinking: rachioSelectors.getThinking(state),
   personErrors: rachioSelectors.getErrors(state),
+  devicesLoaded: rachioSelectors.getDevicesLoaded(state),
   numDevices: rachioSelectors.getNumDevices(state),
 });
 

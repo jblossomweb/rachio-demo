@@ -14,6 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
 import config from 'app/config';
@@ -37,6 +38,7 @@ export interface StateProps {
 export interface DispatchProps {
   collapseMenu: () => void,
   expandMenu: () => void,
+  refreshData: () => void,
 }
 
 export type Props = OwnProps & StateProps & DispatchProps;
@@ -47,6 +49,7 @@ export const LeftMenu: React.FC<Props> = ({
   menuCollapsed,
   collapseMenu,
   expandMenu,
+  refreshData,
   currentPath,
   children,
 }) => {
@@ -64,6 +67,10 @@ export const LeftMenu: React.FC<Props> = ({
     collapseMenu();
   };
 
+  const handleRefresh = () => {
+    refreshData();
+  };
+
   return (
     <Style.Wrapper className={classes.root}>
       <CssBaseline />
@@ -74,20 +81,31 @@ export const LeftMenu: React.FC<Props> = ({
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
+          <Style.LeftSide>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              {title}
+            </Typography>
+          </Style.LeftSide>
+          <Style.RightSide>
+          <Button
+            variant="contained"
+            startIcon={<Icon>refresh</Icon>}
+            onClick={handleRefresh}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            {title}
-          </Typography>
+            Refresh
+          </Button>
+          </Style.RightSide>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -1,0 +1,23 @@
+{
+  "state": {
+    "deviceId": "d8f8ac47-b2c0-40cb-b866-64943a479a2b",
+    "health": "GOOD",
+    "state": "IDLE",
+    "correctFirmware": true,
+    "correctRainDelay": true,
+    "correctSchedule": true,
+    "lastRun": "2020-01-30T04:29:17Z",
+    "nextRun": "2020-01-30T21:55:00Z",
+    "firmwareVersion": "iro2-firmware-5-115",
+    "rainSensorTripped": false,
+    "rssi": -39,
+    "desiredState": "DESIRED_ACTIVE",
+    "desiredRainDelayExpiration": "1970-01-01T00:00:00Z",
+    "flexNodes": [],
+    "desiredSettleTime": 45,
+    "flowFirmwareVersion": "",
+    "desiredIdleLeakDetection": true,
+    "desiredIdleLeakTime": 180,
+    "desiredLightBarSetting": "ONE_HUNDRED_PERCENT"
+  }
+}

@@ -11,6 +11,28 @@ export interface RawPerson extends Person {
   devices: RawDevice[],
 };
 
+export interface DeviceState {
+  deviceId: Device['id'],
+  health: 'GOOD' | string, // TODO
+  "state": 'IDLE' | string, // TODO
+  correctFirmware: boolean,
+  correctRainDelay: boolean,
+  correctSchedule: boolean,
+  lastRun: string, // ISO date
+  nextRun: string, // ISO date
+  firmwareVersion: string,
+  rainSensorTripped: boolean,
+  rssi: number,
+  desiredState: 'DESIRED_ACTIVE' | string, // TODO
+  desiredRainDelayExpiration: string, // ISO date
+  flexNodes: any[], // TODO
+  desiredSettleTime: number,
+  flowFirmwareVersion: string,
+  desiredIdleLeakDetection: boolean,
+  desiredIdleLeakTime: number,
+  desiredLightBarSetting: 'ONE_HUNDRED_PERCENT' | string, // TODO
+};
+
 export interface Device {
   createDate: number,
   id: string,
@@ -28,6 +50,7 @@ export interface Device {
   utcOffset: number,
   homeKitCompatible: boolean,
   deleted: boolean,
+  state?: DeviceState,
 };
 
 export interface RawDevice extends Device {

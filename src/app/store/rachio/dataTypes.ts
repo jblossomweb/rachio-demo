@@ -18,5 +18,8 @@ export const defaultZones: Zones = undefined;
 export type Thinking = boolean;
 export const defaultThinking: Thinking = false;
 
+export type Polling = boolean;
+export const defaultPolling: Polling = false;
+
 export type Errors = List<AppTypes.Error> | null;
 export const defaultErrors: Errors = null;

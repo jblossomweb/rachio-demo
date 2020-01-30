@@ -1,10 +1,7 @@
 import { Dispatch, AnyAction } from 'redux';
-import {
-  ServiceInterface,
-  RequestInterface,
-  ResponseInterface,
-} from 'app/services/rachio/types';
 
+import * as Rachio from 'app/services/rachio/types';
+import * as Legacy from 'app/services/legacy/types';
 import * as ActionTypes from './types';
 import * as thunks from './thunks';
 
@@ -14,11 +11,11 @@ import * as thunks from './thunks';
  */
 
 export const getSelfId: (
-  service: ServiceInterface,
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => ActionTypes.Interface['RACHIO_GET_SELF_ID'] = (
-  service: ServiceInterface,
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => {
@@ -32,7 +29,7 @@ export const getSelfId: (
  * RACHIO_GET_SELF_ID_SUCCESS
  */
 export const getSelfIdSuccess: (
-  response: ResponseInterface['getSelfIdSuccess'],
+  response: Rachio.ResponseInterface['getSelfIdSuccess'],
 ) => ActionTypes.Interface['RACHIO_GET_SELF_ID_SUCCESS'] = response => ({
   type: ActionTypes.RACHIO_GET_SELF_ID_SUCCESS,
   payload: {
@@ -45,13 +42,13 @@ export const getSelfIdSuccess: (
  */
 
 export const getPerson: (
-  id: RequestInterface['getPerson']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['getPerson']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => ActionTypes.Interface['RACHIO_GET_PERSON'] = (
-  id: RequestInterface['getPerson']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['getPerson']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => {
@@ -65,7 +62,7 @@ export const getPerson: (
  * RACHIO_GET_PERSON_SUCCESS
  */
 export const getPersonSuccess: (
-  response: ResponseInterface['getPersonSuccess'],
+  response: Rachio.ResponseInterface['getPersonSuccess'],
 ) => ActionTypes.Interface['RACHIO_GET_PERSON_SUCCESS'] = response => ({
   type: ActionTypes.RACHIO_GET_PERSON_SUCCESS,
   payload: {
@@ -78,13 +75,13 @@ export const getPersonSuccess: (
  */
 
 export const putDeviceOn: (
-  id: RequestInterface['putDeviceOn']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['putDeviceOn']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => ActionTypes.Interface['RACHIO_PUT_DEVICE_ON'] = (
-  id: RequestInterface['putDeviceOn']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['putDeviceOn']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => {
@@ -99,7 +96,7 @@ export const putDeviceOn: (
  * RACHIO_PUT_DEVICE_ON_SUCCESS
  */
 export const putDeviceOnSuccess: (
-  id: RequestInterface['putDeviceOn']['id'],
+  id: Rachio.RequestInterface['putDeviceOn']['id'],
 ) => ActionTypes.Interface['RACHIO_PUT_DEVICE_ON_SUCCESS'] = id => ({
   type: ActionTypes.RACHIO_PUT_DEVICE_ON_SUCCESS,
   payload: { id },
@@ -110,13 +107,13 @@ export const putDeviceOnSuccess: (
  */
 
 export const putDeviceOff: (
-  id: RequestInterface['putDeviceOff']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['putDeviceOff']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => ActionTypes.Interface['RACHIO_PUT_DEVICE_OFF'] = (
-  id: RequestInterface['putDeviceOff']['id'],
-  service: ServiceInterface,
+  id: Rachio.RequestInterface['putDeviceOff']['id'],
+  service: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ) => {
@@ -131,20 +128,73 @@ export const putDeviceOff: (
  * RACHIO_PUT_DEVICE_OFF_SUCCESS
  */
 export const putDeviceOffSuccess: (
-  id: RequestInterface['putDeviceOff']['id'],
+  id: Rachio.RequestInterface['putDeviceOff']['id'],
 ) => ActionTypes.Interface['RACHIO_PUT_DEVICE_OFF_SUCCESS'] = id => ({
   type: ActionTypes.RACHIO_PUT_DEVICE_OFF_SUCCESS,
   payload: { id },
 });
 
 /*
+ * RACHIO_GET_DEVICE_STATE
+ */
+
+export const getDeviceState: (
+  id: Legacy.RequestInterface['getDeviceState']['id'],
+  service: Legacy.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_GET_DEVICE_STATE'] = (
+  id: Legacy.RequestInterface['getDeviceState']['id'],
+  service: Legacy.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.getDeviceState(id, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_GET_DEVICE_STATE,
+    payload: { id },
+  };
+};
+
+/*
+ * RACHIO_GET_DEVICE_STATE_SUCCESS
+ */
+export const getDeviceStateSuccess: (
+  response: Legacy.ResponseInterface['getDeviceStateSuccess'],
+) => ActionTypes.Interface['RACHIO_GET_DEVICE_STATE_SUCCESS'] = response => ({
+  type: ActionTypes.RACHIO_GET_DEVICE_STATE_SUCCESS,
+  payload: {
+    response,
+  },
+});
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError: (
-  response: ResponseInterface['error'],
+  response: Rachio.ResponseInterface['error'],
 ) => ActionTypes.Interface['RACHIO_API_ERROR'] = response => ({
   type: ActionTypes.RACHIO_API_ERROR,
   payload: {
     response,
   },
+});
+
+/*
+ * RACHIO_LEGACY_API_ERROR
+ */
+export const legacyApiError: (
+  response: Legacy.ResponseInterface['error'],
+) => ActionTypes.Interface['RACHIO_LEGACY_API_ERROR'] = response => ({
+  type: ActionTypes.RACHIO_LEGACY_API_ERROR,
+  payload: {
+    response,
+  },
+});
+
+/*
+ * RACHIO_CLEAR_DATA
+ */
+export const clearData: () => ActionTypes.Interface['RACHIO_CLEAR_DATA'] = () => ({
+  type: ActionTypes.RACHIO_CLEAR_DATA,
 });
