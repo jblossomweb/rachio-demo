@@ -2,6 +2,12 @@
   "errors": [
     {
       "message": "Uh-oh"
+    },
+    {
+      "message": "Oh no"
+    },
+    {
+      "message": "This is bad"
     }
   ]
 }

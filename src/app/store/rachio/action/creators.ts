@@ -1,7 +1,7 @@
 import { Dispatch, AnyAction } from 'redux';
 
-import * as Rachio from 'app/services/rachio/types';
-import * as Legacy from 'app/services/legacy/types';
+import { Types as Rachio } from 'app/services/rachio';
+import { Types as Legacy } from 'app/services/legacy';
 import * as ActionTypes from './types';
 import * as thunks from './thunks';
 
@@ -169,6 +169,40 @@ export const getDeviceStateSuccess: (
 });
 
 /*
+ * RACHIO_GET_DEVICE_ZONE_SUMMARY
+ */
+
+export const getDeviceZoneSummary: (
+  id: Legacy.RequestInterface['getDeviceZoneSummary']['id'],
+  service: Legacy.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_GET_DEVICE_ZONE_SUMMARY'] = (
+  id: Legacy.RequestInterface['getDeviceZoneSummary']['id'],
+  service: Legacy.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.getDeviceZoneSummary(id, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_GET_DEVICE_ZONE_SUMMARY,
+    payload: { id },
+  };
+};
+
+/*
+ * RACHIO_GET_DEVICE_ZONE_SUMMARY_SUCCESS
+ */
+export const getDeviceZoneSummarySuccess: (
+  response: Legacy.ResponseInterface['getDeviceZoneSummarySuccess'],
+) => ActionTypes.Interface['RACHIO_GET_DEVICE_ZONE_SUMMARY_SUCCESS'] = response => ({
+  type: ActionTypes.RACHIO_GET_DEVICE_ZONE_SUMMARY_SUCCESS,
+  payload: {
+    response,
+  },
+});
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError: (
@@ -190,6 +224,16 @@ export const legacyApiError: (
   payload: {
     response,
   },
+});
+
+/*
+ * RACHIO_DISMISS_ERROR
+ */
+export const dismissError: (key: number) => ActionTypes.Interface['RACHIO_DISMISS_ERROR'] = key => ({
+  type: ActionTypes.RACHIO_DISMISS_ERROR,
+  payload: {
+    key,
+  }
 });
 
 /*

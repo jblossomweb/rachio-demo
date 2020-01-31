@@ -19,6 +19,9 @@ import Icon from '@material-ui/core/Icon';
 
 import config from 'app/config';
 import { MenuRoute } from 'app/routes';
+import * as AppTypes from 'app/types';
+
+import ErrorAlerts from 'app/components/molecules/ErrorAlerts';
 
 import * as Hooks from './LeftMenu.hooks';
 import * as Style from './LeftMenu.style';
@@ -33,11 +36,13 @@ export interface StateProps {
   menu: MenuRoute[],
   menuCollapsed?: boolean,
   currentPath: MenuRoute['path'],
+  errors?: AppTypes.Error[] | any[],
 };
 
 export interface DispatchProps {
   collapseMenu: () => void,
   expandMenu: () => void,
+  dismissError: (key: number) => void,
   refreshData: () => void,
 }
 
@@ -49,21 +54,20 @@ export const LeftMenu: React.FC<Props> = ({
   menuCollapsed,
   collapseMenu,
   expandMenu,
+  dismissError,
   refreshData,
   currentPath,
+  errors,
   children,
 }) => {
   const classes = Hooks.useStyles();
-  /* const [open, setOpen] = React.useState(false); */
   const open = !menuCollapsed;
 
   const handleDrawerOpen = () => {
-    /* setOpen(true); */
     expandMenu();
   };
 
   const handleDrawerClose = () => {
-    /* setOpen(false); */
     collapseMenu();
   };
 
@@ -74,6 +78,12 @@ export const LeftMenu: React.FC<Props> = ({
   return (
     <Style.Wrapper className={classes.root}>
       <CssBaseline />
+      {errors?.length ? (
+        <ErrorAlerts
+          errors={errors}
+          dismissError={dismissError}
+        />
+      ) : null}
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {

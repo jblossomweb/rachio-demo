@@ -2,20 +2,19 @@ import Window from 'window-or-global';
 import mockDispatch from 'core/mocks/dispatch';
 import * as restMocks from 'core/rest/mocks';
 
-import RachioService from 'app/services/rachio';
-import * as RachioServiceTypes from 'app/services/rachio/types';
+import RachioService, { Types as Rachio } from 'app/services/rachio';
 
 import mockPerson from 'app/__mocks__/person.json';
 
 import * as actionCreators from './creators';
 import * as actionThunks from './thunks';
 
-const mockRest: RachioServiceTypes.ServiceRestInterface = {
+const mockRest: Rachio.ServiceRestInterface = {
   get: restMocks.mockRest().get,
   put: restMocks.mockRest().put,
 };
 
-const mockRestError: RachioServiceTypes.ServiceRestInterface = {
+const mockRestError: Rachio.ServiceRestInterface = {
   get: restMocks.mockRestError().get,
   put: restMocks.mockRestError().put,
 };
@@ -82,7 +81,7 @@ describe('store/rachio/action/thunks', () => {
   });
 
   describe('getPerson', () => {
-    const response = mockPerson as RachioServiceTypes.ResponseInterface['getPersonSuccess'];
+    const response = mockPerson as Rachio.ResponseInterface['getPersonSuccess'];
     const error = { errors: [{ message: 'uh oh'}]};
     const success: Promise<any> = actionThunks.getPerson(
       mockPerson.id,

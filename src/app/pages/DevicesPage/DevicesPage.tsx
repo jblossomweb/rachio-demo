@@ -36,10 +36,10 @@ const DevicesPage: React.FC<Props> = ({
   putDeviceOn,
   putDeviceOff,
 }) => {
-  if (!thinking && (!person || !person.id)) {
+  if ((!person || !person.id) && !thinking && !errors?.length) {
     getPersonId();
   }
-  if (!thinking && (person && !devices)) {
+  if (person && !devices && !thinking && !errors?.length) {
     getPerson(person.id);
   }
   return (

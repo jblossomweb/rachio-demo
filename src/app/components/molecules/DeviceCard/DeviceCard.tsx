@@ -6,7 +6,6 @@ import {
   CardContent,
   CardMedia,
   CardActions,
-  Chip,
   Button,
   Typography,
   Switch,
@@ -15,7 +14,8 @@ import {
 
 import config from 'app/config';
 import * as AppTypes from 'app/types';
-import { getStatus, deviceStatus } from './DeviceCard.utils';
+import StatusChip from 'app/components/atoms/StatusChip';
+import { getStatus } from './DeviceCard.utils';
 import * as Style from './DeviceCard.style';
 
 const deviceImage: string = `${config.publicUrl}/device.png`;
@@ -33,7 +33,7 @@ const DeviceCard: React.FC<Props> = ({
   putDeviceOn,
   putDeviceOff,
 }) => {
-  const [status, statusIcon, statusColor] = getStatus(device) || deviceStatus.OFFLINE;
+  const status = getStatus(device);
   return (
     <Style.Wrapper>
       <Card>
@@ -64,14 +64,7 @@ const DeviceCard: React.FC<Props> = ({
           }
         />
         <CardContent>
-          <Style.Status>
-            <Chip
-              icon={<Icon>{statusIcon}</Icon>}
-              color={`primary`}
-              className={statusColor}
-              label={status}
-            />
-          </Style.Status>
+          <StatusChip status={status} />
           <Style.Icon>
             <Icon>access_time</Icon>&nbsp;{device.timeZone}
           </Style.Icon>
@@ -86,7 +79,7 @@ const DeviceCard: React.FC<Props> = ({
           ) : null}
         </CardContent>
         <CardActions disableSpacing>
-          <Link to={`/devices/${device.id}/zones`}>
+          <Link to={`/zones?deviceId=${device.id}`}>
             <Button>
               Show {numZones} Zones
             </Button>

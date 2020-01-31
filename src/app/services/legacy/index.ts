@@ -1,53 +1,5 @@
-import {
-  promiseGet,
-} from 'core/rest/utils';
-
-import * as Types from './types';
-
-class LegacyService implements Types.ServiceInterface {
-  private apiUrl: string;
-  private apiKey: string;
-  private rest: Types.ServiceRestInterface;
-
-  constructor (
-    apiUrl: string,
-    apiKey: string,
-    rest: Types.ServiceRestInterface,
-  ) {
-    this.apiUrl = apiUrl;
-    this.apiKey = apiKey;
-    this.rest = rest;
-  }
-
-  public getLocations (
-  ) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.apiKey}`,
-    };
-    const endpoint = `/location/listLocations/true`;
-    const url = `${this.apiUrl}${endpoint}`;
-    return promiseGet({
-      url,
-      headers,
-    }, this.rest);
-  }
-
-  public getDeviceState (
-    id: Types.RequestInterface['getDeviceState']['id'],
-  ) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.apiKey}`,
-    };
-    const endpoint = `/device/getDeviceState/${id}`;
-    const url = `${this.apiUrl}${endpoint}`;
-    return promiseGet({
-      url,
-      headers,
-    }, this.rest);
-  }
-
-};
-
+import LegacyService from './LegacyService';
+import * as Types from './LegacyService.types';
+export * from './LegacyService';
+export { Types };
 export default LegacyService;

@@ -123,6 +123,26 @@ export const getDevice = createSelector([
 )));
 
 /*
+ * getDeviceOn
+ */
+
+export const getDeviceOn = (
+  state: AppState,
+) => (
+  id: string,
+) => getDevice(state)(id)?.get('on');
+
+/*
+ * getDeviceStatus
+ */
+
+export const getDeviceStatus = (
+  state: AppState,
+) => (
+  id: string,
+) => getDevice(state)(id)?.get('status');
+
+/*
  * getZones
  */
 
@@ -130,12 +150,12 @@ const getZonesSelector = (
   state: AppState,
 ): DataTypes.Zones => state.get('app').getIn(
   paths.zones(),
-  DataTypes.defaultDevices,
+  DataTypes.defaultZones,
 );
 
 export const getZones = createSelector([
   getZonesSelector,
-], (zones: DataTypes.Zones) => zones?.toSeq());
+], (zones: DataTypes.Zones) => zones?.valueSeq());
 
 /*
  * getDeviceZones

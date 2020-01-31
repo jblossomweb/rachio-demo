@@ -1,11 +1,9 @@
 import * as restMocks from 'core/rest/mocks';
 
-import LegacyService from './';
-import {
-  ServiceRestInterface as LegacyServiceRestInterface,
-} from './types';
+import LegacyService from './LegacyService';
+import * as Legacy from './LegacyService.types';
 
-const mockRest: LegacyServiceRestInterface = {
+const mockRest: Legacy.ServiceRestInterface = {
   get: restMocks.mockRest().get,
 };
 
@@ -13,7 +11,7 @@ const spies = {
   get: jest.spyOn(mockRest, 'get'),
 }
 
-  const mockService = new LegacyService(restMocks.mockUrl, restMocks.mockApiKey, mockRest);
+const mockService = new LegacyService(restMocks.mockUrl, restMocks.mockApiKey, mockRest);
 
 describe('services/legacy', () => {
 
@@ -53,6 +51,27 @@ describe('services/legacy', () => {
     it(`makes a GET request to ${endpoint} with proper headers`, () => {
       expect(spies.get).toHaveBeenLastCalledWith(
         `${restMocks.mockUrl}${endpoint}`,
+        { headers },
+      );
+    });
+  });
+
+  describe('getDeviceZoneSummary', () => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${restMocks.mockApiKey}`,
+    };
+    const mockDeviceId: string = 'asdfasdfasdfasdfasdfasdfasdf';
+    const endpoint = `device/listZones/${mockDeviceId}`;
+    beforeEach(async () => {
+      await mockService.getDeviceZoneSummary(mockDeviceId);
+    });
+    it(`makes a GET request`, () => {
+      expect(spies.get).toHaveBeenCalled();
+    });
+    it(`makes a GET request to ${endpoint} with proper headers`, () => {
+      expect(spies.get).toHaveBeenLastCalledWith(
+        `${restMocks.mockUrl}/${endpoint}`,
         { headers },
       );
     });

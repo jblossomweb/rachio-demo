@@ -1,0 +1,82 @@
+{
+  "createDate": 1527721269000,
+  "id": "09e93008-a39c-4421-97a6-9aee9a78af87",
+  "status": "OFFLINE",
+  "timeZone": "America/New_York",
+  "latitude": 26.3104648,
+  "longitude": -80.200489,
+  "name": "Rachio-55C41F",
+  "scheduleRules": [
+    {
+      "id": "57654472-18e8-4a3a-bbc8-c320dc66ecbf",
+      "zones": [
+        {
+          "zoneId": "c04fa95a-5028-4e73-af52-ceef29f7b8d6",
+          "duration": 660,
+          "sortOrder": 3
+        },
+        {
+          "zoneId": "48c4c90c-92d1-435a-ab86-c3e11f935cab",
+          "duration": 660,
+          "sortOrder": 2
+        },
+        {
+          "zoneId": "48abe5af-6ebb-4318-a3de-07028dc56467",
+          "duration": 660,
+          "sortOrder": 5
+        },
+        {
+          "zoneId": "db9755bc-4315-42e0-a3d1-45c058b6230a",
+          "duration": 660,
+          "sortOrder": 6
+        },
+        {
+          "zoneId": "36458c26-1a34-4a7d-9235-99c7d024895a",
+          "duration": 660,
+          "sortOrder": 7
+        },
+        {
+          "zoneId": "cf5cd5a5-61b9-4a13-985b-ea95af5b4a56",
+          "duration": 660,
+          "sortOrder": 0
+        },
+        {
+          "zoneId": "9a538221-1012-4f35-b85b-dd1bb9533de0",
+          "duration": 660,
+          "sortOrder": 1
+        },
+        {
+          "zoneId": "15a8aa00-92a6-4f5a-a624-6b1ad21c9d07",
+          "duration": 660,
+          "sortOrder": 4
+        }
+      ],
+      "scheduleJobTypes": [
+        "DAY_OF_WEEK_6",
+        "DAY_OF_WEEK_5"
+      ],
+      "operator": "AFTER",
+      "summary": "Every Fri, Sat end by sunrise",
+      "cycleSoakStatus": "ON",
+      "startDate": 1527652800000,
+      "name": "hnnnn",
+      "enabled": true,
+      "startDay": 30,
+      "startMonth": 5,
+      "startYear": 2018,
+      "totalDuration": 5280,
+      "etSkip": true,
+      "externalName": "hnnnn",
+      "cycleSoak": true
+    }
+  ],
+  "serialNumber": "VR0567845",
+  "macAddress": "74C63B55C41F",
+  "on": true,
+  "flexScheduleRules": [],
+  "model": "GENERATION2_8ZONE",
+  "scheduleModeType": "MANUAL",
+  "deleted": false,
+  "utcOffset": -18000000,
+  "homeKitCompatible": false
+}

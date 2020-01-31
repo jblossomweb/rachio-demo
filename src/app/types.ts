@@ -11,10 +11,19 @@ export interface RawPerson extends Person {
   devices: RawDevice[],
 };
 
+export interface DeviceCurrentRunningZone {
+  index: number,
+  zoneNumber: number,
+  paused: boolean,
+  start: string, // ISO date
+  end: string, // ISO date
+  type: 'IRRIGATE' | string, // TODO
+}
+
 export interface DeviceState {
   deviceId: Device['id'],
   health: 'GOOD' | string, // TODO
-  "state": 'IDLE' | string, // TODO
+  state: 'IDLE' | 'WATERING' | 'OFFLINE' | 'STANDBY'
   correctFirmware: boolean,
   correctRainDelay: boolean,
   correctSchedule: boolean,
@@ -31,6 +40,7 @@ export interface DeviceState {
   desiredIdleLeakDetection: boolean,
   desiredIdleLeakTime: number,
   desiredLightBarSetting: 'ONE_HUNDRED_PERCENT' | string, // TODO
+  currentRunningZone?: DeviceCurrentRunningZone,
 };
 
 export interface Device {
@@ -102,8 +112,21 @@ export interface RawZone {
   runtime: number,
 };
 
+export interface ZoneState {
+  lastRun: string, // date ISO string
+  nextRun: string, // date ISO string
+  health: 'GOOD' | string, // TODO
+  lastRunStartCurrent: number,
+  lastRunEndCurrent: number,
+  lastRunEndTime: string, // date ISO string
+};
+
 export interface Zone extends RawZone {
   deviceId: Device['id'],
+  deviceStatus?: Device['status'],
+  deviceOn?: Device['on'],
+  state?: ZoneState,
+  running?: boolean,
 };
 
 export interface ScheduleRule {

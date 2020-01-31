@@ -8,8 +8,8 @@ import * as Style from './HomePage.style';
 
 export interface StateProps {
   person?: AppTypes.Person,
-  personThinking?: boolean,
-  personErrors?: AppTypes.Error[],
+  thinking?: boolean,
+  errors?: AppTypes.Error[],
   devicesLoaded: boolean,
   numDevices: number,
 };
@@ -25,19 +25,20 @@ const HomePage: React.FC<Props> = ({
   getPersonId,
   person,
   getPerson,
-  personThinking,
+  thinking,
+  errors,
   devicesLoaded,
   numDevices,
 }) => {
-  if (!person || !person.id) {
+  if ((!person || !person.id) && !thinking && !errors?.length) {
     getPersonId();
   }
-  if (person && !devicesLoaded) {
+  if (person && !devicesLoaded && !thinking && !errors?.length) {
     getPerson(person.id);
   }
   return (
     <Style.Wrapper>
-      <Spinner visible={!!personThinking} />
+      <Spinner visible={!!thinking} />
       { person && person.username ? (
         <PersonCard
           person={person}

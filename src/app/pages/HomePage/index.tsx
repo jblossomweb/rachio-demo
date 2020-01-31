@@ -7,8 +7,7 @@ import { AppState } from 'core/store';
 import { defaultRest } from 'core/rest/utils';
 import config from 'app/config';
 import * as AppTypes from 'app/types';
-import RachioService from 'app/services/rachio';
-import * as RachioServiceTypes from 'app/services/rachio/types';
+import RachioService, { Types as Rachio } from 'app/services/rachio';
 import * as rachioActions from 'app/store/rachio/action/creators';
 import * as rachioSelectors from 'app/store/rachio/selectors';
 
@@ -28,14 +27,14 @@ export const mapStateToProps = (
   state: AppState,
 ) => ({
   person: rachioSelectors.getPerson(state),
-  personThinking: rachioSelectors.getThinking(state),
-  personErrors: rachioSelectors.getErrors(state),
+  thinking: rachioSelectors.getThinking(state),
+  errors: rachioSelectors.getErrors(state),
   devicesLoaded: rachioSelectors.getDevicesLoaded(state),
   numDevices: rachioSelectors.getNumDevices(state),
 });
 
 export const mapDispatchToProps = (
-  rachioService: RachioServiceTypes.ServiceInterface,
+  rachioService: Rachio.ServiceInterface,
 ) => (
   dispatch: Dispatch<AnyAction>,
 ): DispatchProps => ({

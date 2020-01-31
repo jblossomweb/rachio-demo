@@ -1,7 +1,7 @@
 import { Dispatch, AnyAction } from 'redux';
 
-import * as Legacy from 'app/services/legacy/types';
-import * as Rachio from 'app/services/rachio/types';
+import { Types as Legacy } from 'app/services/legacy';
+import { Types as Rachio } from 'app/services/rachio';
 
 import * as action from './creators';
 
@@ -39,7 +39,25 @@ export const getDeviceState = (
   dispatch: Dispatch<AnyAction>,
 ) => service.getDeviceState(id).then(
   (response) => dispatch(
-    action.getDeviceStateSuccess(response as Legacy.ResponseInterface['getDeviceStateSuccess']),
+    action.getDeviceStateSuccess(
+      response as Legacy.ResponseInterface['getDeviceStateSuccess'],
+    ),
+  ),
+  (error) => dispatch(
+    action.legacyApiError(error as Legacy.ResponseInterface['error']),
+  ),
+);
+
+export const getDeviceZoneSummary = (
+  id: Legacy.RequestInterface['getDeviceZoneSummary']['id'],
+  service: Legacy.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => service.getDeviceZoneSummary(id).then(
+  (response) => dispatch(
+    action.getDeviceZoneSummarySuccess(
+      response as Legacy.ResponseInterface['getDeviceZoneSummarySuccess'],
+    ),
   ),
   (error) => dispatch(
     action.legacyApiError(error as Legacy.ResponseInterface['error']),

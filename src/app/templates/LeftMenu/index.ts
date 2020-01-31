@@ -6,6 +6,7 @@ import { AppState } from 'core/store';
 
 import * as routerSelectors from 'app/store/router/selectors';
 import * as menuSelectors from 'app/store/menu/selectors';
+import * as rachioSelectors from 'app/store/rachio/selectors';
 import * as menuActions from 'app/store/menu/action/creators';
 import * as rachioActions from 'app/store/rachio/action/creators';
 
@@ -21,6 +22,7 @@ export const mapStateToProps = (
   menu,
   menuCollapsed: menuSelectors.getCollapsed(state),
   currentPath: routerSelectors.getPathName(state),
+  errors: rachioSelectors.getErrors(state) as StateProps['errors'],
   ...props,
 });
 
@@ -35,6 +37,9 @@ export const mapDispatchToProps = (
   ),
   refreshData: () => dispatch(
     rachioActions.clearData(),
+  ),
+  dismissError: (key: number) => dispatch(
+    rachioActions.dismissError(key),
   ),
 });
 

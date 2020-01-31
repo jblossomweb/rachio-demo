@@ -16,7 +16,7 @@ import * as rachioActions from 'app/store/rachio/action/creators';
 import * as rachioSelectors from 'app/store/rachio/selectors';
 
 import Template from 'app/templates/LeftMenu';
-import DevicesPage, { Props, DispatchProps } from './DevicesPage';
+import ZonesPage, { Props, DispatchProps } from './ZonesPage';
 
 const services = {
   legacy: new LegacyService(
@@ -38,8 +38,9 @@ export const mapStateToProps = (
   thinking: rachioSelectors.getThinking(state),
   polling: rachioSelectors.getPolling(state),
   errors: rachioSelectors.getErrors(state),
-  devices: rachioSelectors.getDevices(state),
-  deviceNumZones: rachioSelectors.getDeviceNumZones(state),
+  zones: rachioSelectors.getZones(state),
+  getDeviceOn: rachioSelectors.getDeviceOn(state),
+  getDeviceStatus: rachioSelectors.getDeviceStatus(state),
 });
 
 export const mapDispatchToProps = (
@@ -57,21 +58,25 @@ export const mapDispatchToProps = (
   getDeviceState: (id: AppTypes.Device['id']) => dispatch(
     rachioActions.getDeviceState(id, legacyService)(dispatch),
   ),
-  putDeviceOn: (id: AppTypes.Device['id']) => dispatch(
-    rachioActions.putDeviceOn(id, rachioService)(dispatch),
-  ),
-  putDeviceOff: (id: AppTypes.Device['id']) => dispatch(
-    rachioActions.putDeviceOff(id, rachioService)(dispatch),
+  getDeviceZoneSummary: (id: AppTypes.Device['id']) => dispatch(
+    rachioActions.getDeviceZoneSummary(id, legacyService)(dispatch),
   ),
 });
 
 export const onPollInterval = (
-  { devices, getDeviceState, polling, errors }: Props,
+  { zones, getDeviceState, getDeviceZoneSummary, polling, errors }: Props,
   dispatch: Dispatch<AnyAction>,
 ) => {
-  if (devices && !polling && !errors?.length) {
-    devices.forEach((device: AppTypes.Device) => {
-      getDeviceState(device.id);
+  if (zones && !polling && !errors?.length) {
+    const deviceIds: Array<AppTypes.Device['id']> = [];
+    zones.forEach(({ deviceId }: AppTypes.Zone) => {
+      if (!deviceIds.includes(deviceId)) {
+        deviceIds.push(deviceId);
+      }
+    });
+    deviceIds.forEach((deviceId: AppTypes.Device['id']) => {
+      getDeviceState(deviceId); // needed for currentRunningZone
+      getDeviceZoneSummary(deviceId);
     });
   }
 };
@@ -82,11 +87,11 @@ export const ConnectedPage = connect(
   mapStateToProps,
   mapDispatchToProps(services.legacy, services.rachio),
 )(withImmutablePropsToJS(
-  asyncPoll(pollInterval, onPollInterval)(DevicesPage),
+  asyncPoll(pollInterval, onPollInterval)(ZonesPage),
 ) as any);
 
 export default () => (
-  <Template title={`Devices`}>
+  <Template title={`Zones`}>
     <ConnectedPage />
   </Template>
 );

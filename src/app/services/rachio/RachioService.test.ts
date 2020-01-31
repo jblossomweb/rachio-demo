@@ -1,11 +1,9 @@
 import * as restMocks from 'core/rest/mocks';
 
 import RachioService from './';
-import {
-  ServiceRestInterface as RachioServiceRestInterface,
-} from './types';
+import * as Rachio from './RachioService.types';
 
-const mockRest: RachioServiceRestInterface = {
+const mockRest: Rachio.ServiceRestInterface = {
   get: restMocks.mockRest().get,
   put: restMocks.mockRest().put,
 };

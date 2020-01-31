@@ -3,7 +3,7 @@ import { Redirect, Route } from 'core/routes';
 import Page404 from 'app/pages/404';
 import HomePage from 'app/pages/HomePage';
 import DevicesPage from 'app/pages/DevicesPage';
-// import ZonesPage from 'app/pages/ZonesPage';
+import ZonesPage from 'app/pages/ZonesPage';
 
 export interface MenuRoute extends Route {
   title: string,
@@ -25,7 +25,7 @@ export const menu: MenuRoute[] = [
   },
   {
     path: `/zones`,
-    page: HomePage,
+    page: ZonesPage,
     title: 'Zones',
     icon: 'eco',
   },

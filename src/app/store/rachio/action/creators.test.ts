@@ -3,19 +3,18 @@ import * as restMocks from 'core/rest/mocks';
 
 import mockPerson from 'app/__mocks__/person.json';
 
-import RachioService from 'app/services/rachio';
-import * as RachioServiceTypes from 'app/services/rachio/types';
+import RachioService, { Types as Rachio } from 'app/services/rachio';
 
 import * as actionTypes from './types';
 import * as actionCreators from './creators';
 import * as actionThunks from './thunks';
 
-const mockRest: RachioServiceTypes.ServiceRestInterface = {
+const mockRest: Rachio.ServiceRestInterface = {
   get: restMocks.mockRest().get,
   put: restMocks.mockRest().put,
 };
 
-const mockRachioService: RachioServiceTypes.ServiceInterface =
+const mockRachioService: Rachio.ServiceInterface =
   new RachioService(
     restMocks.mockUrl,
     restMocks.mockApiKey,
@@ -47,7 +46,7 @@ describe('store/rachio/action/creators', () => {
   });
 
   describe('getSelfIdSuccess', () => {
-    const response: RachioServiceTypes.ResponseInterface['getSelfIdSuccess'] = { id: mockPerson.id };
+    const response: Rachio.ResponseInterface['getSelfIdSuccess'] = { id: mockPerson.id };
     const action: actionTypes.Interface['RACHIO_GET_SELF_ID_SUCCESS'] = actionCreators.getSelfIdSuccess(response);
     const expectedAction: actionTypes.Interface['RACHIO_GET_SELF_ID_SUCCESS'] = {
       type: actionTypes.RACHIO_GET_SELF_ID_SUCCESS,
@@ -80,7 +79,7 @@ describe('store/rachio/action/creators', () => {
   });
 
   describe('getPersonSuccess', () => {
-    const response = mockPerson as RachioServiceTypes.ResponseInterface['getPersonSuccess'];
+    const response = mockPerson as Rachio.ResponseInterface['getPersonSuccess'];
     const action: actionTypes.Interface['RACHIO_GET_PERSON_SUCCESS'] = actionCreators.getPersonSuccess(response);
     const expectedAction: actionTypes.Interface['RACHIO_GET_PERSON_SUCCESS'] = {
       type: actionTypes.RACHIO_GET_PERSON_SUCCESS,
@@ -97,7 +96,7 @@ describe('store/rachio/action/creators', () => {
   });
 
   describe('apiError', () => {
-    const response: RachioServiceTypes.ResponseErrors = { errors: [{ message: 'uh oh' }]};
+    const response: Rachio.ResponseErrors = { errors: [{ message: 'uh oh' }]};
     const action: actionTypes.Interface['RACHIO_API_ERROR'] = actionCreators.apiError(
       response,
     );
