@@ -91,3 +91,18 @@ export const putDeviceOff = (
     action.apiError(error as Rachio.ResponseInterface['error']),
   ),
 );
+
+export const putZoneStart = (
+  id: Rachio.RequestInterface['putZoneStart']['id'],
+  seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => service.putZoneStart(id, seconds).then(
+  () => dispatch(
+    action.putZoneStartSuccess(id, seconds),
+  ),
+  (error) => dispatch(
+    action.apiError(error as Rachio.ResponseInterface['error']),
+  ),
+);

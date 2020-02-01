@@ -61,6 +61,9 @@ export const mapDispatchToProps = (
   getDeviceZoneSummary: (id: AppTypes.Device['id']) => dispatch(
     rachioActions.getDeviceZoneSummary(id, legacyService)(dispatch),
   ),
+  putZoneStart: (id: AppTypes.Zone['id'], duration: number) => dispatch(
+    rachioActions.putZoneStart(id, duration, rachioService)(dispatch),
+  ),
 });
 
 export const onPollInterval = (

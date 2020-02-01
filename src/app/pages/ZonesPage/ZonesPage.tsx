@@ -21,6 +21,7 @@ export interface DispatchProps {
   getPerson: (id: AppTypes.Person['id']) => void,
   getDeviceState: (id: AppTypes.Device['id']) => void,
   getDeviceZoneSummary: (id: AppTypes.Device['id']) => void,
+  putZoneStart: (id: AppTypes.Zone['id'], duration: number) => void,
 };
 
 export type Props = StateProps & DispatchProps;
@@ -34,6 +35,7 @@ const ZonesPage: React.FC<Props> = ({
   zones,
   getDeviceOn,
   getDeviceStatus,
+  putZoneStart,
 }) => {
   if ((!person || !person.id) && !thinking && !errors?.length) {
     getPersonId();
@@ -52,6 +54,7 @@ const ZonesPage: React.FC<Props> = ({
           zone={zone}
           deviceOn={getDeviceOn(zone.deviceId)}
           deviceStatus={getDeviceStatus(zone.deviceId)}
+          runZone={minutes => putZoneStart(zone.id, minutes * 60)}
         />
       )) : null}
     </Style.Wrapper>

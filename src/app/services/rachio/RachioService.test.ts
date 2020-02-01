@@ -315,14 +315,17 @@ describe('services/rachio', () => {
 
   describe('putZoneStart', () => {
     const mockId = 'abasdfc'; // TODO: mock a meaningful value
+    const mockDuration = 5;
     const headers = mockHeaders;
     const endpoint = `/zone/start`;
     const body = {
       id: mockId,
+      duration: mockDuration,
     };
     beforeEach(async () => {
       await mockService.putZoneStart(
         mockId,
+        mockDuration,
       );
     });
     it(`makes a PUT request`, () => {

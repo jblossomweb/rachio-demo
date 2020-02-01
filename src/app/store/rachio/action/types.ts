@@ -14,6 +14,9 @@ export const RACHIO_PUT_DEVICE_ON_SUCCESS = 'RACHIO_PUT_DEVICE_ON_SUCCESS';
 export const RACHIO_PUT_DEVICE_OFF = 'RACHIO_PUT_DEVICE_OFF';
 export const RACHIO_PUT_DEVICE_OFF_SUCCESS = 'RACHIO_PUT_DEVICE_OFF_SUCCESS';
 
+export const RACHIO_PUT_ZONE_START = 'RACHIO_PUT_ZONE_START';
+export const RACHIO_PUT_ZONE_START_SUCCESS = 'RACHIO_PUT_ZONE_START_SUCCESS';
+
 export const RACHIO_GET_DEVICE_STATE = 'RACHIO_GET_DEVICE_STATE';
 export const RACHIO_GET_DEVICE_STATE_SUCCESS = 'RACHIO_GET_DEVICE_STATE_SUCCESS';
 
@@ -75,6 +78,22 @@ export interface Interface {
     type: 'RACHIO_PUT_DEVICE_OFF_SUCCESS',
     payload: {
       id: Rachio.RequestInterface['putDeviceOn']['id'],
+    },
+  },
+
+  [RACHIO_PUT_ZONE_START]: {
+    type: 'RACHIO_PUT_ZONE_START',
+    payload: {
+      id: Rachio.RequestInterface['putZoneStart']['id'],
+      seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+    },
+  },
+
+  [RACHIO_PUT_ZONE_START_SUCCESS]: {
+    type: 'RACHIO_PUT_ZONE_START_SUCCESS',
+    payload: {
+      id: Rachio.RequestInterface['putZoneStart']['id'],
+      seconds: Rachio.RequestInterface['putZoneStart']['duration'],
     },
   },
 

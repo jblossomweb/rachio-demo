@@ -203,6 +203,44 @@ export const getDeviceZoneSummarySuccess: (
 });
 
 /*
+ * RACHIO_PUT_ZONE_START
+ */
+
+export const putZoneStart: (
+  id: Rachio.RequestInterface['putZoneStart']['id'],
+  seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_PUT_ZONE_START'] = (
+  id: Rachio.RequestInterface['putZoneStart']['id'],
+  seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.putZoneStart(id, seconds, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_PUT_ZONE_START,
+    payload: { id, seconds },
+  };
+};
+
+/*
+ * RACHIO_PUT_ZONE_START_SUCCESS
+ */
+export const putZoneStartSuccess: (
+  id: Rachio.RequestInterface['putZoneStart']['id'],
+  seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+) => ActionTypes.Interface['RACHIO_PUT_ZONE_START_SUCCESS'] = (
+  id: Rachio.RequestInterface['putZoneStart']['id'],
+  seconds: Rachio.RequestInterface['putZoneStart']['duration'],
+) => ({
+  type: ActionTypes.RACHIO_PUT_ZONE_START_SUCCESS,
+  payload: { id, seconds },
+});
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError: (

@@ -230,6 +230,7 @@ class RachioService implements Types.ServiceInterface {
 
   public putZoneStart (
     id: Types.RequestInterface['putZoneStart']['id'],
+    duration: Types.RequestInterface['putZoneStart']['duration'],
   ) {
     const headers = {
       'Content-Type': 'application/json',
@@ -237,7 +238,7 @@ class RachioService implements Types.ServiceInterface {
     };
     const endpoint = `/zone/start`;
     const url = `${this.apiUrl}${endpoint}`;
-    const body = { id };
+    const body = { id, duration };
     return promisePut({
       url,
       body,

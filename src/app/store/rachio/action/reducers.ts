@@ -139,7 +139,6 @@ export const getDeviceStateSuccess = (
   state: AppState,
   { payload: { response } }: ActionTypes.Interface['RACHIO_GET_DEVICE_STATE_SUCCESS'],
 ) => {
-  // TODO: move state redundancy to selector logic (I was tired)
   let newState = state
     .setIn(paths.polling(), false)
     .setIn(paths.errors(), null)
@@ -224,6 +223,27 @@ export const getDeviceZoneSummarySuccess = (
   }
   return newState;
 };
+
+/*
+ * RACHIO_PUT_ZONE_START
+ */
+export const putZoneStart = (
+  state: AppState,
+  action: ActionTypes.Interface['RACHIO_PUT_ZONE_START'],
+) => state
+  .setIn(paths.thinking(), true)
+;
+
+/*
+ * RACHIO_PUT_ZONE_START_SUCCESS
+ */
+export const putZoneStartSuccess = (
+  state: AppState,
+  { payload }: ActionTypes.Interface['RACHIO_PUT_ZONE_START_SUCCESS'],
+) => state
+  .setIn(paths.thinking(), false)
+  .setIn(paths.zoneRunning(payload.id), true)
+;
 
 /*
  * RACHIO_API_ERROR
@@ -313,6 +333,8 @@ export default {
   [ActionTypes.RACHIO_GET_DEVICE_STATE_SUCCESS as string]: getDeviceStateSuccess,
   [ActionTypes.RACHIO_GET_DEVICE_ZONE_SUMMARY as string]: getDeviceZoneSummary,
   [ActionTypes.RACHIO_GET_DEVICE_ZONE_SUMMARY_SUCCESS as string]: getDeviceZoneSummarySuccess,
+  [ActionTypes.RACHIO_PUT_ZONE_START as string]: putZoneStart,
+  [ActionTypes.RACHIO_PUT_ZONE_START_SUCCESS as string]: putZoneStartSuccess,
   [ActionTypes.RACHIO_API_ERROR as string]: apiError,
   [ActionTypes.RACHIO_LEGACY_API_ERROR as string]: legacyApiError,
   [ActionTypes.RACHIO_DISMISS_ERROR as string]: dismissError,

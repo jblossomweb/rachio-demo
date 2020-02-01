@@ -1,4 +1,5 @@
 import React from 'react';
+import Window from 'window-or-global';
 
 import { KnobsInterface, storyBuilder } from 'core/stories';
 import Template from 'app/templates/LightCentered';
@@ -11,6 +12,9 @@ export const mockProps: Props = {
   zone: mockZone,
   deviceOn: mockDevice.on,
   deviceStatus: mockDevice.status,
+  runZone: (seconds: number) => {
+    Window.console.log(`runZone(${seconds})`);
+  }
 };
 
 export const renderScene = (
@@ -25,6 +29,7 @@ export const renderScene = (
     deviceStatus={
       knobs.select('deviceStatus', ['ONLINE', 'OFFLINE'], props.deviceStatus)
     }
+    runZone={mockProps.runZone}
   />
 );
 
