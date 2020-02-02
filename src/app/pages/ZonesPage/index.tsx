@@ -14,6 +14,7 @@ import RachioService, { Types as Rachio } from 'app/services/rachio';
 
 import * as rachioActions from 'app/store/rachio/action/creators';
 import * as rachioSelectors from 'app/store/rachio/selectors';
+import * as routerSelectors from 'app/store/router/selectors';
 
 import Template from 'app/templates/LeftMenu';
 import ZonesPage, { Props, DispatchProps } from './ZonesPage';
@@ -38,9 +39,12 @@ export const mapStateToProps = (
   thinking: rachioSelectors.getThinking(state),
   polling: rachioSelectors.getPolling(state),
   errors: rachioSelectors.getErrors(state),
+  deviceIds: rachioSelectors.getDeviceIds(state),
   zones: rachioSelectors.getZones(state),
   getDeviceOn: rachioSelectors.getDeviceOn(state),
   getDeviceStatus: rachioSelectors.getDeviceStatus(state),
+  getDeviceName: rachioSelectors.getDeviceName(state),
+  queryParams: routerSelectors.getQueryParams(state),
 });
 
 export const mapDispatchToProps = (

@@ -95,6 +95,17 @@ export const getDevices = createSelector([
 );
 
 /*
+ * getDeviceIds
+ */
+
+export const getDeviceIds = createSelector([
+  getDevicesSelector,
+], (devices: DataTypes.Devices) => devices
+  ?.valueSeq()
+  ?.map(device => device.get('id'))
+);
+
+/*
  * getNumDevices
  */
 
@@ -141,6 +152,16 @@ export const getDeviceStatus = (
 ) => (
   id: string,
 ) => getDevice(state)(id)?.get('status');
+
+/*
+ * getDeviceName
+ */
+
+export const getDeviceName = (
+  state: AppState,
+) => (
+  id: string,
+) => getDevice(state)(id)?.get('name');
 
 /*
  * getZones
