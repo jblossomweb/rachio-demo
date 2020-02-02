@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
   CardContent,
   CardActions,
   Avatar,
-  Button,
   Typography,
 } from '@material-ui/core';
 
 import * as AppTypes from 'app/types';
+import LinkButton from 'app/components/atoms/LinkButton';
 
 export interface Props {
   person: AppTypes.Person,
@@ -38,11 +37,11 @@ const PersonCard: React.FC<Props> = ({
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
-      <Link to={`/devices`}>
-        <Button>
-          Show {numDevices} devices
-        </Button>
-      </Link>
+      <LinkButton
+        to={`/devices`}
+        icon={`videogame_asset`}
+        text={`Show ${numDevices} Devices`}
+      />
     </CardActions>
   </Card>
 );

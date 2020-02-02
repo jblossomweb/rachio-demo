@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
   CardContent,
   CardMedia,
   CardActions,
-  Button,
   Typography,
   Switch,
   Icon,
@@ -16,6 +14,7 @@ import config from 'app/config';
 import * as AppTypes from 'app/types';
 import StatusChip from 'app/components/atoms/StatusChip';
 import RunButton from 'app/components/atoms/RunButton';
+import LinkButton from 'app/components/atoms/LinkButton';
 import RunDialog from 'app/components/molecules/RunDialog';
 
 import { getStatus } from './DeviceCard.utils';
@@ -104,15 +103,11 @@ const DeviceCard: React.FC<Props> = ({
           ) : null}
         </CardContent>
         <CardActions disableSpacing>
-          <Style.LinkButton>
-            <Link to={`/zones?deviceId=${device.id}`}>
-              <Button
-                startIcon={<Icon>eco</Icon>}
-              >
-                Show {numZones} Zones
-              </Button>
-            </Link>
-          </Style.LinkButton>
+          <LinkButton
+            to={`/zones?deviceId=${device.id}`}
+            icon={`eco`}
+            text={`Show ${numZones} Zones`}
+          />
           <RunButton
             text={`Quick Run All`}
             onClick={openDialog}

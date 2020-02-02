@@ -54,8 +54,3 @@ export const Status = styled.div`
     background-color: ${palette.GRAY};
   }
 `;
-
-export const LinkButton = styled.span`
-  .MuiButton-root:hover {
-  }
-`;
