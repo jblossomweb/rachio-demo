@@ -39,7 +39,7 @@ export const mapStateToProps = (
   polling: rachioSelectors.getPolling(state),
   errors: rachioSelectors.getErrors(state),
   devices: rachioSelectors.getDevices(state),
-  deviceNumZones: rachioSelectors.getDeviceNumZones(state),
+  deviceZoneIds: rachioSelectors.getDeviceZoneIdsArray(state),
 });
 
 export const mapDispatchToProps = (
@@ -62,6 +62,9 @@ export const mapDispatchToProps = (
   ),
   putDeviceOff: (id: AppTypes.Device['id']) => dispatch(
     rachioActions.putDeviceOff(id, rachioService)(dispatch),
+  ),
+  putZoneStartMultiple: (zones: AppTypes.ZoneStartMultiple) => dispatch(
+    rachioActions.putZoneStartMultiple(zones, rachioService)(dispatch),
   ),
 });
 

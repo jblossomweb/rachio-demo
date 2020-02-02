@@ -15,6 +15,9 @@ import {
 import config from 'app/config';
 import * as AppTypes from 'app/types';
 import StatusChip from 'app/components/atoms/StatusChip';
+import RunButton from 'app/components/atoms/RunButton';
+import RunDialog from 'app/components/molecules/RunDialog';
+
 import { getStatus } from './DeviceCard.utils';
 import * as Style from './DeviceCard.style';
 
@@ -22,18 +25,40 @@ const deviceImage: string = `${config.publicUrl}/device.png`;
 
 export interface Props {
   device: AppTypes.Device,
-  numZones: number,
+  zoneIds: Array<AppTypes.Zone['id']>,
   putDeviceOn: (id: AppTypes.Device['id']) => void,
   putDeviceOff: (id: AppTypes.Device['id']) => void,
+  putZoneStartMultiple: (zones: AppTypes.ZoneStartMultiple) => void,
 };
 
 const DeviceCard: React.FC<Props> = ({
   device,
-  numZones,
+  zoneIds,
   putDeviceOn,
   putDeviceOff,
+  putZoneStartMultiple,
 }) => {
   const status = getStatus(device);
+  const numZones = zoneIds.length;
+  const defaultRunMinutes: number = 3;
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [runMinutes, setRunMinutes] = React.useState(defaultRunMinutes);
+  const openDialog = () => {
+    setDialogOpen(true);
+    setRunMinutes(defaultRunMinutes);
+  };
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
+  const runAllZones = (minutes: number) => {
+    putZoneStartMultiple(zoneIds.map(
+      (id, index) => ({
+        id,
+        duration: minutes * 60,
+        sortOrder: index + 1,
+      })
+    ));
+  };
   return (
     <Style.Wrapper>
       <Card>
@@ -79,13 +104,34 @@ const DeviceCard: React.FC<Props> = ({
           ) : null}
         </CardContent>
         <CardActions disableSpacing>
-          <Link to={`/zones?deviceId=${device.id}`}>
-            <Button>
-              Show {numZones} Zones
-            </Button>
-          </Link>
+          <Style.LinkButton>
+            <Link to={`/zones?deviceId=${device.id}`}>
+              <Button
+                startIcon={<Icon>eco</Icon>}
+              >
+                Show {numZones} Zones
+              </Button>
+            </Link>
+          </Style.LinkButton>
+          <RunButton
+            text={`Quick Run All`}
+            onClick={openDialog}
+          />
         </CardActions>
       </Card>
+      <RunDialog
+        title={`${device.name}: ${numZones} zones`}
+        open={dialogOpen}
+        minutes={runMinutes}
+        onClose={closeDialog}
+        onChange={({ target }: React.ChangeEvent<HTMLInputElement>) => {
+          setRunMinutes(Number(target.value));
+        }}
+        onRun={() => {
+          runAllZones(runMinutes);
+          closeDialog();
+        }}
+      />
     </Style.Wrapper>
   );
 };

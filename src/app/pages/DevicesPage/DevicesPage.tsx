@@ -12,7 +12,7 @@ export interface StateProps {
   polling?: boolean,
   errors?: AppTypes.Error[],
   devices?: AppTypes.Device[],
-  deviceNumZones: (id: AppTypes.Device['id']) => number,
+  deviceZoneIds: (id: AppTypes.Device['id']) => Array<AppTypes.Zone['id']>,
 };
 
 export interface DispatchProps {
@@ -21,6 +21,7 @@ export interface DispatchProps {
   getDeviceState: (id: AppTypes.Device['id']) => void,
   putDeviceOn: (id: AppTypes.Device['id']) => void,
   putDeviceOff: (id: AppTypes.Device['id']) => void,
+  putZoneStartMultiple: (zones: AppTypes.ZoneStartMultiple) => void,
 };
 
 export type Props = StateProps & DispatchProps;
@@ -32,9 +33,10 @@ const DevicesPage: React.FC<Props> = ({
   thinking,
   errors,
   devices,
-  deviceNumZones,
+  deviceZoneIds,
   putDeviceOn,
   putDeviceOff,
+  putZoneStartMultiple,
 }) => {
   if ((!person || !person.id) && !thinking && !errors?.length) {
     getPersonId();
@@ -51,9 +53,10 @@ const DevicesPage: React.FC<Props> = ({
         <DeviceCard
           key={device.id}
           device={device}
-          numZones={deviceNumZones(device.id)}
+          zoneIds={deviceZoneIds(device.id)}
           putDeviceOn={putDeviceOn}
           putDeviceOff={putDeviceOff}
+          putZoneStartMultiple={putZoneStartMultiple}
         />
       ))}
     </Style.Wrapper>

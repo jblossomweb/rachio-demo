@@ -246,6 +246,26 @@ export const putZoneStartSuccess = (
 ;
 
 /*
+ * RACHIO_PUT_ZONE_START_MULTIPLE
+ */
+export const putZoneStartMultiple = (
+  state: AppState,
+  action: ActionTypes.Interface['RACHIO_PUT_ZONE_START_MULTIPLE'],
+) => state
+  .setIn(paths.thinking(), true)
+;
+
+/*
+ * RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS
+ */
+export const putZoneStartMultipleSuccess = (
+  state: AppState,
+  { payload }: ActionTypes.Interface['RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS'],
+) => state
+  .setIn(paths.thinking(), false)
+;
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError = (

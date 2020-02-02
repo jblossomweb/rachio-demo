@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
   .MuiSwitch-colorPrimary.Mui-checked {
     color: ${palette.BLUE};
   }
+  .MuiCircularProgress-root {
+    color: ${palette.BLUE};
+  }
 `;
 
 export const SubHeader = styled.div`
@@ -24,23 +27,5 @@ export const Image = styled.div`
 export const Status = styled.div`
   .MuiChip-root {
     margin-bottom: ${rem(16)};
-  }
-`;
-
-export const MinutesInput = styled.span`
-  .MuiInput-root {
-    margin-top: ${rem(-3)};
-  }
-`;
-
-export const RunButton = styled.span`
-  .MuiButton-root:hover {
-    background-color: ${palette.BLUE};
-    color: ${palette.WHITE}
-  }
-`;
-
-export const CancelButton = styled.span`
-  .MuiButton-root:hover {
   }
 `;

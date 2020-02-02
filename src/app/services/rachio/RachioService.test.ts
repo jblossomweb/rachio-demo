@@ -339,4 +339,32 @@ describe('services/rachio', () => {
       );
     });
   });
+
+  describe('putZoneStartMultiple', () => {
+    const mockZones = [
+      { id: 'asdf', duration: 60, sortOrder: 1 },
+      { id: 'qwert', duration: 120, sortOrder: 2 },
+      { id: 'zxcv', duration: 180, sortOrder: 3 },
+    ]
+    const headers = mockHeaders;
+    const endpoint = `/zone/start_multiple`;
+    const body = {
+      zones: mockZones,
+    };
+    beforeEach(async () => {
+      await mockService.putZoneStartMultiple(
+        mockZones,
+      );
+    });
+    it(`makes a PUT request`, () => {
+      expect(spies.put).toHaveBeenCalled();
+    });
+    it(`makes a PUT request to ${endpoint} with proper body and headers`, () => {
+      expect(spies.put).toHaveBeenLastCalledWith(
+        `${restMocks.mockUrl}${endpoint}`,
+        body,
+        { headers },
+      );
+    });
+  });
 });

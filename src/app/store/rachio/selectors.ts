@@ -172,6 +172,7 @@ export const getDeviceZones = createSelector([
     (zone: DataTypes.Zone) => zone.get('deviceId') === deviceId,
   )
   ?.toSeq()
+  .sortBy(zone => zone.get('zoneNumber'))
 ));
 
 /*
@@ -185,4 +186,35 @@ export const getDeviceNumZones = createSelector([
 ) => memoize((
   deviceId: AppTypes.Device['id'],
 ) => deviceZones(deviceId)?.size || 0
+));
+
+/*
+ * getDeviceZoneIds
+ */
+
+export const getDeviceZoneIds = createSelector([
+  getDeviceZones,
+], (
+  deviceZones,
+) => memoize((
+  deviceId: AppTypes.Device['id'],
+) => deviceZones(deviceId)
+  ?.valueSeq()
+  .map(
+    (zone: DataTypes.Zone) => zone.get('id')
+  )
+));
+
+/*
+ * getDeviceZoneIdsArray
+ */
+
+export const getDeviceZoneIdsArray = createSelector([
+  getDeviceZoneIds,
+], (
+  deviceZoneIds,
+) => memoize((
+  deviceId: AppTypes.Device['id'],
+) => deviceZoneIds(deviceId)
+  ?.toArray()
 ));

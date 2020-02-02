@@ -129,10 +129,16 @@ export interface Zone extends RawZone {
   running?: boolean,
 };
 
+export type ZoneStartMultiple = Array<{
+  id: Zone['id'],
+  duration: number,
+  sortOrder: number,
+}>;
+
 export interface ScheduleRule {
   id: string,
   zones: Array<{
-    zoneId: RawZone['id'],
+    zoneId: Zone['id'],
     duration: number,
     sortOrder: number,
   }>,

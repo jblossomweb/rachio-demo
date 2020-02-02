@@ -17,12 +17,15 @@ export const mockProps: Props = {
     'scheduleRules',
     'flexScheduleRules',
   ]),
-  numZones: mockDevice.zones.length,
+  zoneIds: mockDevice.zones.map(zone => zone.id),
   putDeviceOn: id => {
     Window.console.log(`putDeviceOn(${id})`)
   },
   putDeviceOff: id => {
     Window.console.log(`putDeviceOff(${id})`)
+  },
+  putZoneStartMultiple: zones => {
+    Window.console.log(`putZoneStartMultiple(${zones})`)
   },
 };
 
@@ -34,9 +37,10 @@ export const renderScene = (
 ) => (
   <DeviceCard
     device={knobs.object('device', props.device)}
-    numZones={knobs.number('numZones', props.numZones)}
+    zoneIds={knobs.object('zoneIds', props.zoneIds)}
     putDeviceOn={mockProps.putDeviceOn}
     putDeviceOff={mockProps.putDeviceOff}
+    putZoneStartMultiple={mockProps.putZoneStartMultiple}
   />
 );
 

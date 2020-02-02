@@ -245,6 +245,23 @@ class RachioService implements Types.ServiceInterface {
       headers,
     }, this.rest);
   }
+
+  public putZoneStartMultiple (
+    zones: Types.RequestInterface['putZoneStartMultiple']['zones'],
+  ) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.apiKey}`,
+    };
+    const endpoint = `/zone/start_multiple`;
+    const url = `${this.apiUrl}${endpoint}`;
+    const body = { zones };
+    return promisePut({
+      url,
+      body,
+      headers,
+    }, this.rest);
+  }
 };
 
 export default RachioService;

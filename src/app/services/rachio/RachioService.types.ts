@@ -3,19 +3,56 @@ import * as AppTypes from 'app/types';
 
 export interface RequestInterface {
   getSelfId: {},
-  getPerson: { id: AppTypes.Person['id'] },
-  getDevice: { id: AppTypes.Device['id'] },
-  getDeviceSchedule: { id: AppTypes.Device['id'] },
-  getDeviceEvents: { id: AppTypes.Device['id'], startTime: number, endTime: number },
-  getDeviceForecast: { id: AppTypes.Device['id'], units: AppTypes.Units },
-  putDeviceStopWater: { id: AppTypes.Device['id'] },
-  putDeviceRainDelay: { id: AppTypes.Device['id'] },
-  putDeviceOn: { id: AppTypes.Device['id'] },
-  putDeviceOff: { id: AppTypes.Device['id'] },
-  putDevicePauseZoneRun: { id: AppTypes.Device['id'] },
-  putDeviceResumeZoneRun: { id: AppTypes.Device['id'] },
-  getZone: { id: AppTypes.Zone['id'] },
-  putZoneStart: { id: AppTypes.Zone['id'], duration: number },
+  getPerson: {
+    id: AppTypes.Person['id'],
+  },
+  getDevice: {
+    id: AppTypes.Device['id'],
+  },
+  getDeviceSchedule: {
+    id: AppTypes.Device['id']
+  },
+  getDeviceEvents: {
+    id: AppTypes.Device['id'],
+    startTime: number,
+    endTime: number,
+  },
+  getDeviceForecast: {
+    id: AppTypes.Device['id'],
+    units: AppTypes.Units,
+  },
+  putDeviceStopWater: {
+    id: AppTypes.Device['id'],
+  },
+  putDeviceRainDelay: {
+    id: AppTypes.Device['id'],
+  },
+  putDeviceOn: {
+    id: AppTypes.Device['id'],
+  },
+  putDeviceOff: {
+    id: AppTypes.Device['id'],
+  },
+  putDevicePauseZoneRun: {
+    id: AppTypes.Device['id'],
+  },
+  putDeviceResumeZoneRun: {
+    id: AppTypes.Device['id'],
+  },
+  getZone: {
+    id: AppTypes.Zone['id'],
+  },
+  putZoneStart: {
+    id: AppTypes.Zone['id'],
+    duration: number,
+  },
+  putZoneStartMultiple: {
+    zones: Array<{
+      id: AppTypes.Zone['id'],
+      duration: number,
+      sortOrder: number,
+    }>,
+  },
 };
 
 export interface ResponseError {
@@ -143,6 +180,13 @@ export interface ServiceInterface {
   putZoneStart: (
     id: RequestInterface['putZoneStart']['id'],
     duration: RequestInterface['putZoneStart']['duration'],
+  ) => Promise<
+    ResponseInterface['putSuccess'] |
+    ResponseInterface['error']
+  >,
+
+  putZoneStartMultiple: (
+    zones: RequestInterface['putZoneStartMultiple']['zones'],
   ) => Promise<
     ResponseInterface['putSuccess'] |
     ResponseInterface['error']

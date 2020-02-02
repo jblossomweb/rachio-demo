@@ -106,3 +106,17 @@ export const putZoneStart = (
     action.apiError(error as Rachio.ResponseInterface['error']),
   ),
 );
+
+export const putZoneStartMultiple = (
+  zones: Rachio.RequestInterface['putZoneStartMultiple']['zones'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => service.putZoneStartMultiple(zones).then(
+  () => dispatch(
+    action.putZoneStartMultipleSuccess(zones),
+  ),
+  (error) => dispatch(
+    action.apiError(error as Rachio.ResponseInterface['error']),
+  ),
+);

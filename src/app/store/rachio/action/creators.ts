@@ -241,6 +241,40 @@ export const putZoneStartSuccess: (
 });
 
 /*
+ * RACHIO_PUT_ZONE_START_MULTIPLE
+ */
+
+export const putZoneStartMultiple: (
+  zones: Rachio.RequestInterface['putZoneStartMultiple']['zones'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => ActionTypes.Interface['RACHIO_PUT_ZONE_START_MULTIPLE'] = (
+  zones: Rachio.RequestInterface['putZoneStartMultiple']['zones'],
+  service: Rachio.ServiceInterface,
+) => (
+  dispatch: Dispatch<AnyAction>,
+) => {
+  thunks.putZoneStartMultiple(zones, service)(dispatch);
+  return {
+    type: ActionTypes.RACHIO_PUT_ZONE_START_MULTIPLE,
+    payload: { zones },
+  };
+};
+
+/*
+ * RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS
+ */
+export const putZoneStartMultipleSuccess: (
+  zones: Rachio.RequestInterface['putZoneStartMultiple']['zones'],
+) => ActionTypes.Interface['RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS'] = (
+  zones: Rachio.RequestInterface['putZoneStartMultiple']['zones'],
+) => ({
+  type: ActionTypes.RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS,
+  payload: { zones },
+});
+
+/*
  * RACHIO_API_ERROR
  */
 export const apiError: (

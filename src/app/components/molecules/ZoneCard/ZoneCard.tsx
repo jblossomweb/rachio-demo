@@ -5,18 +5,15 @@ import {
   CardContent,
   CardMedia,
   CardActions,
-  Button,
+  CircularProgress,
   Typography,
-  Icon,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
 } from '@material-ui/core';
 
 import * as AppTypes from 'app/types';
 import StatusChip from 'app/components/atoms/StatusChip';
+import RunButton from 'app/components/atoms/RunButton';
+import RunDialog from 'app/components/molecules/RunDialog';
+
 import { getStatus, getZoneRuns, defaultZoneRuns } from './ZoneCard.utils';
 import * as Style from './ZoneCard.style';
 
@@ -69,67 +66,37 @@ const ZoneCard: React.FC<Props> = ({
               component="div"
             >
               <Style.Status>
-                <StatusChip status={getStatus(zone, deviceOn, deviceStatus)} />
+                <StatusChip
+                  status={getStatus(zone, deviceOn, deviceStatus)}
+                />
               </Style.Status>
               Last Run: {lastRun}<br/>
               Next Run: {nextRun}<br/>
             </Typography>
-          ) : null}
+          ) : (
+            <CircularProgress />
+          )}
         </CardContent>
         <CardActions disableSpacing>
-          <Style.RunButton>
-            <Button
-              startIcon={<Icon>play_arrow</Icon>}
-              onClick={openDialog}
-            >
-              Quick Run
-            </Button>
-          </Style.RunButton>
+          <RunButton
+            text={`Quick Run`}
+            onClick={openDialog}
+          />
         </CardActions>
       </Card>
-      <Dialog
+      <RunDialog
+        title={`Run ${zone.name}`}
         open={dialogOpen}
+        minutes={runMinutes}
         onClose={closeDialog}
-      >
-        <DialogTitle>Run {zone.name}</DialogTitle>
-        <DialogContent>
-          <Style.MinutesInput>
-            <TextField
-              size={`small`}
-              value={runMinutes}
-              onChange={({ target }: React.ChangeEvent<HTMLInputElement>) => {
-                setRunMinutes(Number(target.value));
-              }}
-              inputProps={{
-                type: 'number',
-                min: 0,
-                max: 30,
-              }}
-            />&nbsp;Minutes
-          </Style.MinutesInput>
-        </DialogContent>
-        <DialogActions>
-            <Style.CancelButton>
-              <Button
-                startIcon={<Icon>cancel</Icon>}
-                onClick={closeDialog}
-              >
-                Cancel
-              </Button>
-            </Style.CancelButton>
-            <Style.RunButton>
-              <Button
-                startIcon={<Icon>play_arrow</Icon>}
-                onClick={() => {
-                  runZone(runMinutes);
-                  closeDialog();
-                }}
-              >
-                Start
-              </Button>
-            </Style.RunButton>
-        </DialogActions>
-      </Dialog>
+        onChange={({ target }: React.ChangeEvent<HTMLInputElement>) => {
+          setRunMinutes(Number(target.value));
+        }}
+        onRun={() => {
+          runZone(runMinutes);
+          closeDialog();
+        }}
+      />
     </Style.Wrapper>
   );
 };
