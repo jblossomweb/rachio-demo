@@ -22,6 +22,12 @@ export const scenes = {
   'offline': renderScene({
     status: 'OFFLINE',
   }),
+  'extended offline': renderScene({
+    status: 'EXTENDED_OFFLINE',
+  }),
+  'unknown': renderScene({
+    status: 'UNKNOWN',
+  }),
   'standby': renderScene({
     status: 'STANDBY',
   }),

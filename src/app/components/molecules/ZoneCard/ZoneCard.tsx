@@ -33,6 +33,7 @@ const ZoneCard: React.FC<Props> = ({
   const defaultRunMinutes: number = 3;
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [runMinutes, setRunMinutes] = React.useState(defaultRunMinutes);
+  const status = getStatus(zone, deviceOn, deviceStatus);
   const { lastRun, nextRun } =
     zone.state ?
     getZoneRuns(zone.state) :
@@ -67,7 +68,7 @@ const ZoneCard: React.FC<Props> = ({
             >
               <Style.Status>
                 <StatusChip
-                  status={getStatus(zone, deviceOn, deviceStatus)}
+                  status={status}
                 />
               </Style.Status>
               Last Run: {lastRun}<br/>
@@ -80,6 +81,7 @@ const ZoneCard: React.FC<Props> = ({
         <CardActions disableSpacing>
           <RunButton
             text={`Quick Run`}
+            disabled={['OFFLINE', 'EXTENDED_OFFLINE', 'STANDBY'].includes(status)}
             onClick={openDialog}
           />
         </CardActions>

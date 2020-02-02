@@ -6,16 +6,19 @@ import * as Style from './RunButton.style';
 
 export interface Props {
   text: string,
+  disabled?: boolean,
   onClick?: (event: any) => void,
 }
 
 const RunButton: React.FC<Props> = ({
   text,
+  disabled,
   onClick,
 }) => (
   <Style.Wrapper>
     <Button
       startIcon={<Icon>play_arrow</Icon>}
+      disabled={disabled}
       onClick={onClick}
     >
       {text}

@@ -1,6 +1,6 @@
 import { IconProps } from '@material-ui/core';
 
-export type StateString = 'WATERING' | 'IDLE' | 'STANDBY' | 'OFFLINE';
+export type StateString = 'WATERING' | 'IDLE' | 'STANDBY' | 'OFFLINE' | 'EXTENDED_OFFLINE' | 'UNKNOWN';
 export type StateColor = 'blue' | 'red' | 'green' | 'gray';
 export type State = [
   StateString,

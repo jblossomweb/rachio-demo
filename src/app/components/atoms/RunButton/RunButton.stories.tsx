@@ -22,6 +22,7 @@ export const renderScene = (
 ) => (
   <RunButton
     text={knobs.text('text', props.text)}
+    disabled={knobs.boolean('disabled', !!props.disabled)}
     onClick={mockProps.onClick}
   />
 );
@@ -33,6 +34,10 @@ export const scenes = {
   'text': renderScene({
     ...mockProps,
     text: 'Run Run Run'
+  }),
+  'disabled': renderScene({
+    ...mockProps,
+    disabled: true,
   }),
 };
 

@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const StatusChip: React.FC<Props> = ({ status }) => {
-  const [state, icon, color] = STATES[status];
+  const [state, icon, color] = STATES[status] || STATES.UNKNOWN;
   return (
     <Style.Wrapper>
       <Chip

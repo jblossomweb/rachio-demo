@@ -110,6 +110,7 @@ const DeviceCard: React.FC<Props> = ({
           />
           <RunButton
             text={`Quick Run All`}
+            disabled={!device.on || ['OFFLINE', 'EXTENDED_OFFLINE', 'STANDBY'].includes(status)}
             onClick={openDialog}
           />
         </CardActions>

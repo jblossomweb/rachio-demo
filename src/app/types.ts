@@ -23,7 +23,7 @@ export interface DeviceCurrentRunningZone {
 export interface DeviceState {
   deviceId: Device['id'],
   health: 'GOOD' | string, // TODO
-  state: 'IDLE' | 'WATERING' | 'OFFLINE' | 'STANDBY'
+  state: 'IDLE' | 'WATERING' | 'OFFLINE' | 'EXTENDED_OFFLINE' | 'STANDBY'
   correctFirmware: boolean,
   correctRainDelay: boolean,
   correctSchedule: boolean,
