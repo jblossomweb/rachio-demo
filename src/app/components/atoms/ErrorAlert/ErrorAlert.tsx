@@ -17,29 +17,27 @@ export interface Props {
 const ErrorAlert: React.FC<Props> = ({
   error,
   dismissError,
-}) => {
-  return (
-    <Style.Wrapper>
-      <MuiAlert
-        elevation={6}
-        variant={`filled`}
-        severity={`error`}
-        onClose={dismissError}
-        action={(
-          <IconButton
-            size={`small`}
-            aria-label={`close`}
-            color={`inherit`}
-            onClick={dismissError}
-          >
-            <Icon fontSize="small">close</Icon>
-          </IconButton>
-        )}
-      >
-        {error.message || 'something went wrong'}
-      </MuiAlert>
-    </Style.Wrapper>
-  );
-};
+}) => (
+  <Style.Wrapper>
+    <MuiAlert
+      elevation={6}
+      variant={`filled`}
+      severity={`error`}
+      onClose={dismissError}
+      action={(
+        <IconButton
+          size={`small`}
+          aria-label={`close`}
+          color={`inherit`}
+          onClick={dismissError}
+        >
+          <Icon fontSize="small">close</Icon>
+        </IconButton>
+      )}
+    >
+      {error.message || 'something went wrong'}
+    </MuiAlert>
+  </Style.Wrapper>
+);
 
 export default ErrorAlert;

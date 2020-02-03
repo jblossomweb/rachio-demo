@@ -1,15 +1,15 @@
 import * as types from './types';
 
 /*
- * EXPAND_MENU
+ * MENU_EXPAND_MENU
  */
-export const expandMenu: () => types.Interface['EXPAND_MENU'] = () => ({
-  type: types.EXPAND_MENU,
+export const expandMenu: () => types.Interface['MENU_EXPAND_MENU'] = () => ({
+  type: types.MENU_EXPAND_MENU,
 });
 
 /*
- * COLLAPSE_MENU
+ * MENU_COLLAPSE_MENU
  */
-export const collapseMenu: () => types.Interface['COLLAPSE_MENU'] = () => ({
-  type: types.COLLAPSE_MENU,
+export const collapseMenu: () => types.Interface['MENU_COLLAPSE_MENU'] = () => ({
+  type: types.MENU_COLLAPSE_MENU,
 });

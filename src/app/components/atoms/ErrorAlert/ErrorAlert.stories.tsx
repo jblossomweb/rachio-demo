@@ -8,6 +8,10 @@ import mockErrors from 'app/__mocks__/errors.json';
 import ErrorAlert, { Props } from './ErrorAlert';
 
 const mockError = mockErrors.errors[0];
+const mockInvalidError: any = {
+  ...mockError,
+  message: undefined,
+};
 
 export const mockProps: Props = {
   error: mockError,
@@ -31,6 +35,10 @@ export const renderScene = (
 export const scenes = {
   'sample': renderScene({
     ...mockProps,
+  }),
+  'default message': renderScene({
+    ...mockProps,
+    error: mockInvalidError,
   }),
 };
 

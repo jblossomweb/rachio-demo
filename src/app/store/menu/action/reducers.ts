@@ -4,7 +4,7 @@ import paths from '../paths';
 import * as types from './types';
 
 /*
- * EXPAND_MENU
+ * MENU_EXPAND_MENU
  */
 export const expandMenu = (
   state: AppState,
@@ -12,7 +12,7 @@ export const expandMenu = (
   .setIn(paths.collapsed(), false);
 
 /*
- * COLLAPSE_MENU
+ * MENU_COLLAPSE_MENU
  */
 export const collapseMenu = (
   state: AppState,
@@ -23,6 +23,6 @@ export const collapseMenu = (
  * default export
  */
 export default {
-  [types.EXPAND_MENU as string]: expandMenu,
-  [types.COLLAPSE_MENU as string]: collapseMenu,
+  [types.MENU_EXPAND_MENU as string]: expandMenu,
+  [types.MENU_COLLAPSE_MENU as string]: collapseMenu,
 };

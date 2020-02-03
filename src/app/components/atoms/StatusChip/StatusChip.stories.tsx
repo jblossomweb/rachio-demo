@@ -7,6 +7,8 @@ import Template from 'app/templates/LightCentered';
 import StatusChip, { Props } from './StatusChip';
 import { STATES } from './StatusChip.constants';
 
+const unknownState: any = 'not part of enum';
+
 export const renderScene = (
   knobProps: Props,
 ) => (
@@ -25,9 +27,6 @@ export const scenes = {
   'extended offline': renderScene({
     status: 'EXTENDED_OFFLINE',
   }),
-  'unknown': renderScene({
-    status: 'UNKNOWN',
-  }),
   'standby': renderScene({
     status: 'STANDBY',
   }),
@@ -36,6 +35,12 @@ export const scenes = {
   }),
   'watering': renderScene({
     status: 'WATERING',
+  }),
+  'unknown': renderScene({
+    status: 'UNKNOWN',
+  }),
+  'unknown (implicit)': renderScene({
+    status: unknownState,
   }),
 };
 

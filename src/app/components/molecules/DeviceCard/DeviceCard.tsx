@@ -18,6 +18,7 @@ import LinkButton from 'app/components/atoms/LinkButton';
 import RunDialog from 'app/components/molecules/RunDialog';
 
 import { getStatus } from './DeviceCard.utils';
+import { defaultRunMinutes } from './DeviceCard.constants';
 import * as Style from './DeviceCard.style';
 
 const deviceImage: string = `${config.publicUrl}/device.png`;
@@ -39,7 +40,6 @@ const DeviceCard: React.FC<Props> = ({
 }) => {
   const status = getStatus(device);
   const numZones = zoneIds.length;
-  const defaultRunMinutes: number = 3;
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [runMinutes, setRunMinutes] = React.useState(defaultRunMinutes);
   const openDialog = () => {

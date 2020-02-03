@@ -12,8 +12,7 @@
     "lint": "tsc && tslint -c tslint.json -p tsconfig.json",
     "ship": "yarn lint && yarn test-ci && yarn build && firebase deploy",
     "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
-    "build-storybook": "build-storybook -o .storybook/build",
-    "generate-service": "yo react-caveman:service"
+    "build-storybook": "build-storybook -o .storybook/build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,7 +20,8 @@
   "jest": {
     "collectCoverageFrom": [
       "src/app/**/*.{js,jsx,ts,tsx}",
-      "!src/app/**/stories.{js,jsx,ts,tsx}",
+      "!src/app/store/**/paths.{js,ts}",
+      "!src/app/**/*.stories.{js,jsx,ts,tsx}",
       "!src/app/**/*.test.{js,jsx,ts,tsx}",
       "!src/app/config.{js,jsx,ts,tsx}"
     ]

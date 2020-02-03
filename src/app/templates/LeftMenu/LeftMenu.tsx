@@ -94,7 +94,7 @@ export const LeftMenu: React.FC<Props> = ({
           <Style.LeftSide>
             <IconButton
               color="inherit"
-              aria-label="open drawer"
+              aria-label="expand menu"
               onClick={handleDrawerOpen}
               edge="start"
               className={clsx(classes.menuButton, {
@@ -111,6 +111,7 @@ export const LeftMenu: React.FC<Props> = ({
           <Button
             variant="contained"
             startIcon={<Icon>refresh</Icon>}
+            aria-label="refresh data"
             onClick={handleRefresh}
           >
             Refresh
@@ -135,7 +136,10 @@ export const LeftMenu: React.FC<Props> = ({
           <Link to={`/`}>
             <Style.LogoWide src={logoWide} />
           </Link>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            aria-label="collapse menu"
+            onClick={handleDrawerClose}
+          >
             <ChevronLeftIcon />
           </IconButton>
         </div>

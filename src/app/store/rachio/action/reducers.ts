@@ -141,20 +141,29 @@ export const getDeviceStateSuccess = (
 ) => {
   let newState = state
     .setIn(paths.polling(), false)
+  ;
+  const { deviceId, currentRunningZone } = response.state || {};
+  if (!deviceId) {
+    const error = { message: 'Invalid Response from getDeviceState' };
+    return newState.updateIn(
+      paths.errors(),
+      errors => errors ?
+        errors.push(fromJS(error)) :
+        fromJS([error])
+      ,
+    );
+  }
+  newState = newState
     .setIn(paths.errors(), null)
     .setIn(
-      paths.deviceState(response.state.deviceId),
+      paths.deviceState(deviceId),
       fromJS(response.state),
     )
   ;
-  const { deviceId, currentRunningZone } = response.state || {};
   const status = response.state?.state;
-  if (!deviceId) {
-    return state;
-  }
   const zones: DataTypes.Zones = state
     .getIn(paths.zones())
-    .filter(
+    ?.filter(
       (zone: DataTypes.Zone) => zone.get('deviceId') === deviceId
     )
   ;
@@ -210,16 +219,25 @@ export const getDeviceZoneSummarySuccess = (
 ) => {
   let newState: AppState = state
     .setIn(paths.polling(), false)
-    .setIn(paths.errors(), null)
   ;
   if (payload?.response?.zoneSummary) {
-    payload.response.zoneSummary.forEach((zoneSummary: any) => {
-      const { zoneDetail, zoneState } = zoneSummary;
+    payload.response.zoneSummary.forEach((summary: any) => {
+      const { zoneDetail, zoneState } = summary;
       newState = newState.setIn(
         paths.zoneState(zoneDetail.id),
-        zoneState,
+        fromJS(zoneState),
       )
-    })
+      .setIn(paths.errors(), null);
+    });
+  } else {
+    const error = { message: 'Invalid Response from getDeviceZoneSummary' };
+    newState = newState.updateIn(
+      paths.errors(),
+      errors => errors ?
+        errors.push(fromJS(error)) :
+        fromJS([error])
+      ,
+    );
   }
   return newState;
 };
@@ -242,6 +260,7 @@ export const putZoneStartSuccess = (
   { payload }: ActionTypes.Interface['RACHIO_PUT_ZONE_START_SUCCESS'],
 ) => state
   .setIn(paths.thinking(), false)
+  .setIn(paths.errors(), null)
   .setIn(paths.zoneRunning(payload.id), true)
 ;
 
@@ -261,8 +280,18 @@ export const putZoneStartMultiple = (
 export const putZoneStartMultipleSuccess = (
   state: AppState,
   { payload }: ActionTypes.Interface['RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS'],
-) => state
-  .setIn(paths.thinking(), false)
+) => {
+  let newState = state
+    .setIn(paths.thinking(), false)
+    .setIn(paths.errors(), null)
+  ;
+  payload.zones.forEach(({ id }) => {
+    newState = newState
+      .setIn(paths.zoneRunning(id), true)
+    ;
+  })
+  return newState;
+}
 ;
 
 /*
@@ -277,7 +306,7 @@ export const apiError = (
   if (response.errors) {
     newState = newState.updateIn(
       paths.errors(),
-      errors => {
+      (errors: DataTypes.Errors) => {
         let updatedErrors = errors || fromJS([]);
         response.errors.forEach(error => {
           updatedErrors = updatedErrors.push(fromJS(error));
@@ -304,7 +333,11 @@ export const legacyApiError = (
   .setIn(paths.polling(), false)
   .updateIn(
     paths.errors(),
-    errors => errors ? errors.push(fromJS(payload.response)) : fromJS([payload.response]),
+    errors =>
+      errors ?
+      errors.push(fromJS(payload.response)) :
+      fromJS([payload.response])
+    ,
   )
 ;
 
@@ -355,6 +388,8 @@ export default {
   [ActionTypes.RACHIO_GET_DEVICE_ZONE_SUMMARY_SUCCESS as string]: getDeviceZoneSummarySuccess,
   [ActionTypes.RACHIO_PUT_ZONE_START as string]: putZoneStart,
   [ActionTypes.RACHIO_PUT_ZONE_START_SUCCESS as string]: putZoneStartSuccess,
+  [ActionTypes.RACHIO_PUT_ZONE_START_MULTIPLE as string]: putZoneStartMultiple,
+  [ActionTypes.RACHIO_PUT_ZONE_START_MULTIPLE_SUCCESS as string]: putZoneStartMultipleSuccess,
   [ActionTypes.RACHIO_API_ERROR as string]: apiError,
   [ActionTypes.RACHIO_LEGACY_API_ERROR as string]: legacyApiError,
   [ActionTypes.RACHIO_DISMISS_ERROR as string]: dismissError,
