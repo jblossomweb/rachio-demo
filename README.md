@@ -1,6 +1,6 @@
 # Rachio Demo
 
-![](https://i.giphy.com/media/FbJUFRD0aynAs/giphy.webp)
+![](https://media.giphy.com/media/7EqSP8bbgxYvS/giphy.gif)
 
 ## Zones User Interface
 
